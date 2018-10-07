@@ -6,3 +6,27 @@ funciton:
 search blank: search for the blog based on the keywords
 explore: the recently published blog
 Blog: write your blog
+
+|-flasky
+    |-app/
+        |-templates/
+        |-static/
+        |-main/
+            |-__init__.py
+            |-errors.py
+            |-forms.py
+            |-views.py
+        |-__init__.py
+        |-email.py
+        |-models.py
+    |-migrations/
+    |-tests/
+        |-__init__.py
+        |-test*.py
+    |-venv/
+    |-requirements.txt
+    |-config.py
+    |-manage.py
+to get requirements:pip freeze > requirements.txt
+
+python manage.py
