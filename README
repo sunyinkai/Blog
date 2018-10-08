@@ -1,11 +1,4 @@
-SubmitField: the button to submit form
-BooleanField: the blank the was used for "remember the passwords"
-Message flash: give the user a status update after a request is completed
-
-funciton:
-search blank: search for the blog based on the keywords
-explore: the recently published blog
-Blog: write your blog
+strcture:
 
 |-flasky
     |-app/
@@ -27,6 +20,17 @@ Blog: write your blog
     |-requirements.txt
     |-config.py
     |-manage.py
+-----------------------------------------
+usage:
+	python manage.py
+-----------------------------------------
+base funciton:
+search blank: search for the blog based on the keywords
+explore: the recently published blog
+Blog: write your blog
+----------------------------------------
+SubmitField: the button to submit form
+BooleanField: the blank the was used for "remember the passwords"
+Message flash: give the user a status update after a request is completed
 to get requirements:pip freeze > requirements.txt
 
-python manage.py
