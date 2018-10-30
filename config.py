@@ -11,7 +11,7 @@ class Config:
     def init_app(app):
         pass
 
-class DevelopmentConfig(Config):
+class DevelopmentConfig(Config):#succeed class Config
     DEBUG=True
     MAIL_SERVER = 'smtp.googlemail.com'
     MAIL_PORT = 587
