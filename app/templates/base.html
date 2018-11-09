@@ -39,6 +39,8 @@
 
                 {% else %}
                 <li><a href="{{ url_for('auth.login') }}">Sign In</a></li>
+                                                        {# need  a word 'or' #}
+                <li><a href="{{ url_for('auth.register') }}">Sign Up</a> </li>
                 {% endif %}
             </ul>
         </div>
@@ -48,7 +50,7 @@
 
 {% block content %}
 <div class="container">
-    {% for message in get_flashed_messages() %}
+    {% for message in get_flashed_messages() %}  {# only use flash can't show the message #}
     <div class="alert alert-warning">
         <button type="button" class="close" data-dismiss="alert" >&times;</button>
         {{message}}
