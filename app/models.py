@@ -61,6 +61,11 @@ class User(UserMixin, db.Model):  # what's the UserMixin
     password_hash = db.Column(db.String(128))
     confirmed = db.Column(db.Boolean, default=False)
 
+    #the extra information to show
+    name=db.Column(db.String(64))
+    location=db.Column(db.String(64))
+    about_me=db.Column(db.Text())
+
     @property
     def password(self):
         raise AttributeError('password is not a readable attribute!')
