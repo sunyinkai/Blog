@@ -5,19 +5,19 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 class Config:
     # SECRET_KEY = os.environ.get('SECRET_KEY') or 'hard to guess string'
+    # MAIL_USERNAME = os.environ.get('MAIL_USERNAME') #not  ok
+    # MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
+    # FLASKY_ADMIN = os.environ.get('FLASKY_ADMIN')
     SECRECT_KEY=environ_var.SECRET_KEY
+    MAIL_USERNAME=environ_var.MAIL_USERNAME
+    MAIL_PASSWORD=environ_var.MAIL_PASSWORD
+    FLASKY_ADMIN=environ_var.FLASKY_ADMIN
     MAIL_SERVER = os.environ.get('MAIL_SERVER', 'smtp.qq.com')
     MAIL_PORT = int(os.environ.get('MAIL_PORT', '587'))
     MAIL_USE_TLS = os.environ.get('MAIL_USE_TLS', 'true').lower() in \
         ['true', 'on', '1']
-    # MAIL_USERNAME = os.environ.get('MAIL_USERNAME') #not  ok
-    # MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
-    MAIL_USERNAME=environ_var.MAIL_USERNAME
-    MAIL_PASSWORD=environ_var.MAIL_PASSWORD
     FLASKY_MAIL_SUBJECT_PREFIX = '[Flasky]'
     FLASKY_MAIL_SENDER = 'Flasky Admin <1091491336@qq.com>'
-    # FLASKY_ADMIN = os.environ.get('FLASKY_ADMIN')
-    FLASKY_ADMIN=environ_var.FLASKY_ADMIN
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     @staticmethod
