@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, session, url_for, flash
+from flask import Flask, render_template, redirect, session, url_for, flash,request,current_app
 from .. import db
 from ..models import User,Role,Permission,Post
 from . import main
@@ -9,14 +9,18 @@ from ..decorators import admin_required
 @main.route('/',methods=['GET','POST'])
 def index():
     form=PostForm()
-    print(current_user.can(Permission.WRITE_ARTICLES))
     if current_user.can(Permission.WRITE_ARTICLES) and form.validate_on_submit():
         post=Post(body=form.body.data,author=current_user._get_current_object())
         db.session.add(post)
         db.session.commit()
         return redirect(url_for('.index'))
-    posts=Post.query.order_by(Post.timestamp.desc()).all()
-    return render_template('index.html',form=form,posts=posts,current_time=datetime.utcnow())
+    #渲染分页
+    page=request.args.get('page',1,type=int)
+    pagination=Post.query.order_by(Post.timestamp.desc()).paginate(
+        page,per_page=current_app.config['FLASKY_POSTS_PER_PAGE'],error_out=False
+    )
+    posts=pagination.items
+    return render_template('index.html',form=form,posts=posts,pagination=pagination,current_time=datetime.utcnow())
 
 @main.route('/user/<username>')
 def user(username):

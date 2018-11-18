@@ -1,6 +1,7 @@
 {# super()  ---->to fetch the origin content#}
 {% extends "base.html" %}
 {% import "bootstrap/wtf.html" as wtf %}
+{% import "_macros.html" as macros %}
 
 {% block title %} home{% endblock %}
 {% block page_content %}
@@ -18,4 +19,7 @@
     {% endif %}
 </div>
 {% include '_posts.html' %}
+<div class="pagination">
+    {{ macros.pagination_widget(pagination,'.index') }}
+</div>
 {% endblock %}
