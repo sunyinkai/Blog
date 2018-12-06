@@ -1,12 +1,11 @@
 from flask import render_template, redirect, request, url_for, flash
-from flask_login import login_user, logout_user, login_required
+from flask_login import login_user, logout_user, login_required,current_user
 from . import auth
 from ..models import User
 from .forms import LoginForm, RegistrationForm, ChangePasswordForm
 from .forms import PasswordResetRequestForm, PasswordResetForm
 from .. import db
 from ..email import send_email
-from flask_login import current_user
 
 
 @auth.route('/login', methods=['GET', 'POST'])
@@ -49,7 +48,7 @@ def confirm(token):
     if current_user.confirmed:
         return redirect(url_for('main.index'))
     if current_user.confirm(token):
-        db.session.commit()
+        db.session.commit()   #why this should be recommit?
         flash('You have confirmed your account.Thanks!')
     else:
         flash('The imformation link is invalid or has expired.')

@@ -12,6 +12,7 @@ class Config:
     MAIL_USERNAME=environ_var.MAIL_USERNAME
     MAIL_PASSWORD=environ_var.MAIL_PASSWORD
     FLASKY_ADMIN=environ_var.FLASKY_ADMIN
+    FLASKY_FOLLOWERS_PER_PAGE = 10
     MAIL_SERVER = os.environ.get('MAIL_SERVER', 'smtp.qq.com')
     MAIL_PORT = int(os.environ.get('MAIL_PORT', '587'))
     MAIL_USE_TLS = os.environ.get('MAIL_USE_TLS', 'true').lower() in \
