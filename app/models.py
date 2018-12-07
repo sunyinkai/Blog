@@ -67,12 +67,23 @@ class User(UserMixin, db.Model):  # what's the UserMixin
     password_hash = db.Column(db.String(128))
     confirmed = db.Column(db.Boolean, default=False)
 
-    # the extra information to show
+    # the user information
     name = db.Column(db.String(64))
     location = db.Column(db.String(64))
     about_me = db.Column(db.Text())
     posts = db.relationship('Post', backref='author', lazy='dynamic')
+    # avatar
+    def gravatar(self, size=100, default='identicon', rating='g'):
+        if request.is_secure:
+            url = 'https://secure.gravatar.com/avatar'
+        else:
+            url = 'http://www.gravatar.com/avatar'
+        hash = hashlib.md5(self.email.encode('utf-8')).hexdigest()
+        return '{url}/{hash}?s={size}&d={default}&r={rating}'.format(
+            url=url, hash=hash, size=size, default=default, rating=rating)
 
+
+    # authentication
     @property
     def password(self):
         raise AttributeError('password is not a readable attribute!')
@@ -122,6 +133,7 @@ class User(UserMixin, db.Model):  # what's the UserMixin
         return True
 
 
+
     #def the follower and followed
     followed=db.relationship('Follow',foreign_keys=[Follow.follower_id],\
                              backref=db.backref('follower',lazy='joined'),\
@@ -148,6 +160,11 @@ class User(UserMixin, db.Model):  # what's the UserMixin
     def is_followed_by(self,user):
         return self.followers.filter_by(followered_id=user.id).first() is not None
 
+    @property
+    def followed_posts(self):
+        return Post.query.join(Follow,Follow.followed_id==Post.author_id).filter(Follow.follower_id==self.id)
+
+
     #def the permissions
     def can(self, permissions):
         return self.role is not None and (self.role.permissions & permissions) == permissions
@@ -158,22 +175,13 @@ class User(UserMixin, db.Model):  # what's the UserMixin
     def __repr__(self):
         return '<User %r>' % self.username
 
-    # avatar
-    def gravatar(self, size=100, default='identicon', rating='g'):
-        if request.is_secure:
-            url = 'https://secure.gravatar.com/avatar'
-        else:
-            url = 'http://www.gravatar.com/avatar'
-        hash = hashlib.md5(self.email.encode('utf-8')).hexdigest()
-        return '{url}/{hash}?s={size}&d={default}&r={rating}'.format(
-            url=url, hash=hash, size=size, default=default, rating=rating)
 
+    # the extra function to assistant
     @staticmethod
     def generate_fake(count=100):
         from sqlalchemy.exc import IntegrityError
         from random import seed
         import forgery_py
-
         seed()
         for i in range(count):
             u = User(email=forgery_py.internet.email_address(),
@@ -190,7 +198,13 @@ class User(UserMixin, db.Model):  # what's the UserMixin
             except IntegrityError:
                 db.session.rollback()
 
-
+    @staticmethod
+    def add_self_follows():
+        for user in User.query.all():
+            if not user.is_following(user):
+                user.follow(user)
+                db.session.add(user)
+                db.session.commit()
 
 
 class AnonymousUser(AnonymousUserMixin):
