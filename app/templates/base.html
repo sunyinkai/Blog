@@ -1,3 +1,5 @@
+{# this page is used for navigation bar #}
+
 {% extends "bootstrap/base.html" %}
 
 {% block title %}Flasky{% endblock %}
@@ -9,8 +11,8 @@
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
 {% endblock %}
 
-
-{% block navbar %} {#the navigation blank#}
+{# the navigation blank #}
+{% block navbar %}
 <div class="navbar navbar-inverse" role="navigation">
     <div class="container">
         <div class="navbar-header">
@@ -24,11 +26,12 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li><a href="/">Home</a></li>  {#  define an unordered list#}
+                <li><a href="/">Home</a></li>
+                {# define an unordered list#}
             </ul>
 
             <ul class="nav navbar-nav">
-                <li><a href="/404">Blog</a> </li>
+                <li><a href="/404">Blog</a></li>
             </ul>
 
             <ul class="nav navbar-nav">
@@ -38,7 +41,8 @@
             <ul class="nav navbar-nav navbar-right">
                 {% if current_user.is_authenticated %} {# can't add () #}
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ current_user.username }} <b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ current_user.username }} <b
+                            class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a href="{{ url_for('main.user',username=current_user.username)}}">Profile</a></li>
                         <li><a href="{{ url_for('auth.change_password') }}">Change Password</a></li>
@@ -48,8 +52,8 @@
 
                 {% else %}
                 <li><a href="{{ url_for('auth.login') }}">Sign In</a></li>
-                                                        {# need  a word 'or' #}
-                <li><a href="{{ url_for('auth.register') }}">Sign Up</a> </li>
+                {# need a word 'or' #}
+                <li><a href="{{ url_for('auth.register') }}">Sign Up</a></li>
                 {% endif %}
             </ul>
         </div>
@@ -59,9 +63,9 @@
 
 {% block content %}
 <div class="container">
-    {% for message in get_flashed_messages() %}  {# only use flash can't show the message #}
+    {% for message in get_flashed_messages() %} {# only use flash can't show the message #}
     <div class="alert alert-warning">
-        <button type="button" class="close" data-dismiss="alert" >&times;</button>
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
         {{message}}
     </div>
     {% endfor %}

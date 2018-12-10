@@ -8,7 +8,8 @@
         </div>
         <div class="comment-content">
             <div class="comment-date">{{ moment(comment.timestamp).fromNow() }}</div>
-            <div class="comment-author"><a href="{{ url_for('.user', username=comment.author.username) }}">{{ comment.author.username }}</a></div>
+            <div class="comment-author"><a href="{{ url_for('.user', username=comment.author.username) }}">
+                {{ comment.author.username }}</a></div>
             <div class="comment-body">
                 {% if comment.body_html %}
                     {{ comment.body_html | safe }}
@@ -16,6 +17,12 @@
                     {{ comment.body }}
                 {% endif %}
             </div>
+            {% if comment.author.id==current_user.id %}
+            <div style="position:relative;right:-1000px">
+                <a class="btn btn-danger btn-xs"  href="{{ url_for('.comment_delete',id=comment.id, page=page) }}">
+                    Delete</a>
+            </div>
+            {% endif %}
         </div>
     </li>
     {% endfor %}
