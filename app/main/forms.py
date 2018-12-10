@@ -1,18 +1,19 @@
-from flask_wtf import Form,FlaskForm
+from flask_wtf import FlaskForm
 from wtforms import StringField, BooleanField, SubmitField, PasswordField, TextAreaField
-from wtforms.validators import DataRequired, Email, AnyOf, Length,Regexp,Required
-from wtforms import ValidationError,SelectField
+from wtforms.validators import DataRequired, Email, AnyOf, Length, Regexp, Required
+from wtforms import ValidationError, SelectField
 from ..models import Role, User
 from flask_pagedown.fields import PageDownField
 
-class NameForm(Form):  # define a form
+
+class NameForm(FlaskForm):  # define a form
     name = StringField('username', validators=[DataRequired(u'please input the valid user id!')])
     password = PasswordField('password', validators=[DataRequired(message=u'Please input the correct password!')])
     remeber_me = BooleanField('remerber me', default=False)
     submit = SubmitField(u'Login')
 
 
-class EditProfileForm(Form):
+class EditProfileForm(FlaskForm):
     name = StringField('Real name', validators=[Length(0, 64)])
     location = StringField('Location', validators=[Length(0, 64)])
     about_me = TextAreaField('About me')
@@ -51,10 +52,12 @@ class EditProfileAdminForm(FlaskForm):
             raise ValidationError('Username already in use.')
 
 
-class PostForm(Form):
-    body=PageDownField("what's your mind?",validators=[DataRequired()])
-    submit=SubmitField('submit')
+class PostForm(FlaskForm):
+    title = StringField("what's your title?", validators=[DataRequired()])
+    body = PageDownField("what's your mind?", validators=[DataRequired()])
+    submit = SubmitField('submit')
 
-class CommentForm(Form):
-    body=StringField('',validators=[DataRequired()])
-    sumbit=SubmitField('Submit')
+
+class CommentForm(FlaskForm):
+    body = StringField('', validators=[DataRequired()])
+    sumbit = SubmitField('Submit')
