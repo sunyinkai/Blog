@@ -17,12 +17,7 @@
                 {% endif %}
             </div>
 
-            <!--{% if post.author.id==current_user.id %}-->
-            <!--<div style="position:relative;right:-1000px">-->
-                <!--<a class="btn btn-danger btn-xs" href="{{ url_for('.post_delete',id=post.id, page=page) }}">-->
-                    <!--Delete</a>-->
-            <!--</div>-->
-            <!--{% endif %}-->
+
 
             <div class="post-footer">
                 {% if current_user == post.author %}
@@ -40,6 +35,11 @@
                 <a href="{{ url_for('.post', id=post.id) }}#comments">
                     <span class="label label-primary">{{ post.comments.count() }} Comments</span>
                 </a>
+                {% if post.author.id==current_user.id %}
+                <a class="label label-danger" href="{{ url_for('.post_delete',id=post.id, page=page) }}">
+                    Delete
+                </a>
+            {% endif %}
             </div>
         </div>
     </li>

@@ -45,9 +45,15 @@
         </p>
     </div>
 </div>
+
+{# 显示用户已发表的博客　#}
 <h3>Posts by {{ user.username }}</h3>
-{% include '_posts.html' %}
+{% include '_posts_user.html' %}
 {% if pagination %}
+{% if post.author.id==current_user.id %}
+
+
+{% endif %}
 <div class="pagination">
     {{ macros.pagination_widget(pagination, '.user', username=user.username) }}
 </div>

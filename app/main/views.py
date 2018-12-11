@@ -213,11 +213,22 @@ def show_followed():
     resp.set_cookie('show_followed', '1', max_age=30 * 24 * 60 * 60)
     return resp
 
+
 @main.route('/moderate/delete/<int:id>')
 @login_required
-def comment_delete(id): #the comment id
-    comment=Comment.query.filter_by(id=id).first()
+def comment_delete(id):  # the comment id
+    comment = Comment.query.filter_by(id=id).first()
     db.session.delete(comment)
     db.session.commit()
-    post_id=comment.post_id
+    post_id = comment.post_id
     return redirect(url_for('.post', id=post_id, page=1))
+
+
+@main.route('/post/delete/<int:id>')
+@login_required
+def post_delete(id):
+    u=Post.query.filter_by(id=id).first()
+    username=u.author.username
+    db.session.delete(u)
+    db.session.commit()
+    return redirect(url_for('.user',username=username))

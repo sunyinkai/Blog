@@ -25,13 +25,13 @@
             <a class="navbar-brand" href="/">Flasky</a>
         </div>
         <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li><a href="/">Home</a></li>
-                {# define an unordered list#}
-            </ul>
+            <!--<ul class="nav navbar-nav">-->
+                <!--<li><a href="/">Home</a></li>-->
+            <!--</ul>-->
 
             <ul class="nav navbar-nav">
-                <li><a href="/404">Blog</a></li>
+                <!--<li><a href="/404">Blog</a></li>-->
+                <li><a href="{{ url_for('main.index') }}">Blog</a></li>
             </ul>
 
             <ul class="nav navbar-nav">

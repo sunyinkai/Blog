@@ -1,5 +1,6 @@
 import os
 import environ_var
+
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 
@@ -8,20 +9,20 @@ class Config:
     # MAIL_USERNAME = os.environ.get('MAIL_USERNAME') #not  ok
     # MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
     # FLASKY_ADMIN = os.environ.get('FLASKY_ADMIN')
-    SECRECT_KEY=environ_var.SECRET_KEY
-    MAIL_USERNAME=environ_var.MAIL_USERNAME
-    MAIL_PASSWORD=environ_var.MAIL_PASSWORD
-    FLASKY_ADMIN=environ_var.FLASKY_ADMIN
+    SECRECT_KEY = environ_var.SECRET_KEY
+    MAIL_USERNAME = environ_var.MAIL_USERNAME
+    MAIL_PASSWORD = environ_var.MAIL_PASSWORD
+    FLASKY_ADMIN = environ_var.FLASKY_ADMIN
     FLASKY_FOLLOWERS_PER_PAGE = 10
     MAIL_SERVER = os.environ.get('MAIL_SERVER', 'smtp.qq.com')
     MAIL_PORT = int(os.environ.get('MAIL_PORT', '587'))
     MAIL_USE_TLS = os.environ.get('MAIL_USE_TLS', 'true').lower() in \
-        ['true', 'on', '1']
+                   ['true', 'on', '1']
     FLASKY_MAIL_SUBJECT_PREFIX = '[Flasky]'
     FLASKY_MAIL_SENDER = 'Flasky Admin <1091491336@qq.com>'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    FLASKY_POSTS_PER_PAGE=20
-    FLASKY_COMMENTS_PER_PAGE=10
+    FLASKY_POSTS_PER_PAGE = 10
+    FLASKY_COMMENTS_PER_PAGE = 10
 
     @staticmethod
     def init_app(app):
@@ -31,18 +32,18 @@ class Config:
 class DevelopmentConfig(Config):
     DEBUG = True
     SQLALCHEMY_DATABASE_URI = os.environ.get('DEV_DATABASE_URL') or \
-        'sqlite:///' + os.path.join(basedir, 'data-dev.sqlite')
+                              'sqlite:///' + os.path.join(basedir, 'data-dev.sqlite')
 
 
 class TestingConfig(Config):
     TESTING = True
     SQLALCHEMY_DATABASE_URI = os.environ.get('TEST_DATABASE_URL') or \
-        'sqlite://'
+                              'sqlite://'
 
 
 class ProductionConfig(Config):
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
-        'sqlite:///' + os.path.join(basedir, 'data.sqlite')
+                              'sqlite:///' + os.path.join(basedir, 'data.sqlite')
 
 
 config = {
