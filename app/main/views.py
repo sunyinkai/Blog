@@ -34,6 +34,19 @@ def index():
                            posts=posts, pagination=pagination, current_time=datetime.utcnow())
 
 
+@main.route('/post_blog', methods=['GET', 'POST'])
+@login_required
+def post_blog():
+    form = PostForm()
+    if current_user.can(Permission.WRITE_ARTICLES) and form.validate_on_submit():
+        post = Post(body=form.body.data, title=form.title.data, author=current_user._get_current_object())
+        db.session.add(post)
+        db.session.commit()
+        flash('your post has been published!')
+        return redirect(url_for('.index'))  # post success ,to the index
+    return render_template('post_blog.html', form=form, current_time=datetime.utcnow())
+
+
 @main.route('/user/<username>')
 def user(username):
     user = User.query.filter_by(username=username).first()
@@ -227,8 +240,10 @@ def comment_delete(id):  # the comment id
 @main.route('/post/delete/<int:id>')
 @login_required
 def post_delete(id):
-    u=Post.query.filter_by(id=id).first()
-    username=u.author.username
-    db.session.delete(u)
-    db.session.commit()
-    return redirect(url_for('.user',username=username))
+    u = Post.query.filter_by(id=id).first()
+    username = u.author.username
+    if u.author.id== current_user.id:
+        db.session.delete(u)
+        db.session.commit()
+        #  删除post后跳转有问题
+        return redirect(url_for('.user', username=username))

@@ -8,11 +8,9 @@
 <div class="page-header">
     <h1>Hello, {% if current_user.is_authenticated %}{{ current_user.username }}{% else %}Stranger{% endif %}!</h1>
 </div>
-<div>
-    {% if current_user.can(Permission.WRITE_ARTICLES) %}
-    {{ wtf.quick_form(form) }}
-    {% endif %}
-</div>
+
+
+{# show the blog #}
 <div class="post-tabs">
     <ul class="nav nav-tabs">
         <li{% if not show_followed %} class="active"{% endif %}><a href="{{ url_for('.show_all') }}">All</a></li>
@@ -22,6 +20,7 @@
     </ul>
     {% include '_posts.html' %}
 </div>
+
 {% if pagination %}
 <div class="pagination">
     {{ macros.pagination_widget(pagination, '.index') }}

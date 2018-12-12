@@ -1,5 +1,10 @@
-strcture:
+install dependency:
+    pip install -r requirements.txt
+usage:
+	python manage.py
 
+-----------------------------------------
+strcture:
 |-flasky
     |-app/
         |-templates/
@@ -20,22 +25,23 @@ strcture:
     |-requirements.txt
     |-config.py
     |-manage.py
+
 -----------------------------------------
-usage:
-	python manage.py
------------------------------------------
-base funciton:
+basic function:
 search blank: search for the blog based on the keywords
 explore: the recently published blog
 Home: write your blog
 Blog: to show all the Blog and your friends blog
 Comment:write your comment
+
 ----------------------------------------
 the navigation bar:
-Flasky:to get the post your friend publish
+Home:to get the newest post your friends published
 Blog:to write your own blog
-Explore: provide search and I'm feeling something
+Explore: to provide "search" and "I'm feeling something"
 userInfo: the show the information and log in,log out
+private_message: to notify the message you have receive
+
 ----------------------------------------
-to get requirements:   pip freeze > requirements.txt
-to install dependency: pip install -r requirements.txt
+extra information:
+write the dependency to a txt:   pip freeze > requirements.txt
