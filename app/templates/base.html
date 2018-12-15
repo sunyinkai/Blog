@@ -34,7 +34,14 @@
             <ul class="nav navbar-nav">
                 <li><a href="https://docs.python-guide.org/#">Explore</a></li>
             </ul>
-
+            <ul> <!-- search function -->
+                <form class="navbar-form navbar-left" action="{{ url_for('search.search') }}" method="GET">
+                <div class="form-group">
+                  <input type="text" class="form-control" placeholder="Key Words" name="keyword" >
+                </div>
+                <button type="submit" class="btn btn-default" >Search</button>
+              </form>
+            </ul>
             <ul class="nav navbar-nav navbar-right">
                 {% if current_user.is_authenticated %} {# can't add () #}
                 <li class="dropdown">

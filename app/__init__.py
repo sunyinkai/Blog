@@ -34,5 +34,6 @@ def create_app(config_name):
     app.register_blueprint(main_blueprint)
     from .auth import auth as auth_blueprint
     app.register_blueprint(auth_blueprint, url_prefix='/auth')
-
+    from .search import search as search_blueprint
+    app.register_blueprint(search_blueprint,url_prex='/search')
     return app

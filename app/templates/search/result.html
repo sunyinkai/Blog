@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% import "_macros.html" as macros %}
+
+{% block title %}Flasky{% endblock %}
+
+{% block page_content %}
+
+
+{# show the blog #}
+<div class="post-tabs">
+    <ul class="post_set">
+        {% for post in post_set %}
+        <li class="post">
+            <div class="post-thumbnail">
+                <a href="{{ url_for('main.user', username=post.author.username) }}">
+                    <img class="img-rounded profile-thumbnail" src="{{ post.author.gravatar(size=40) }}">
+                </a>
+            </div>
+            <div class="post-content">
+
+                <div class="post-date">{{ moment(post.timestamp).fromNow() }}</div>
+                <div class="post-author"><a href="{{ url_for('main.user', username=post.author.username) }}">
+                    {{ post.author.username }}</a></div>
+                <!-- if click the whole body it will jump-->
+                <a href="{{ url_for('main.post',id=post.id) }}" style="text-decoration:none;color:black;">
+                    <div class="post-body">
+                        {% if post.body_html %}
+                        {{ post.body_html | safe }}
+                        {% else %}
+                        {{ post.body }}
+                        {% endif %}
+                    </div>
+                </a>
+
+                <div class="post-footer">
+                    {% if current_user == post.author %}
+                    <a href="{{ url_for('main.edit', id=post.id) }}">
+                        <span class="label label-primary">Edit</span>
+                    </a>
+                    {% endif %}
+                    <a href="{{ url_for('main.post', id=post.id) }}#comments">
+                        <span class="label label-primary">{{ post.comments.count() }} Comments</span>
+                    </a>
+                    {% if post.author.id==current_user.id %}
+                    <a class="label label-danger" href="{{ url_for('main.post_delete',id=post.id, page=page) }}">
+                        Delete
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+        </li>
+
+
+        {% endfor %}
+    </ul>
+
+</div>
+
+{% if pagination %}
+<div class="pagination">
+    {{ macros.pagination_widget(pagination, '.index') }}
+</div>
+{% endif %}
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+{{ pagedown.include_pagedown() }}
+{% endblock %}
