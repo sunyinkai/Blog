@@ -41,7 +41,7 @@
                     <span class="label label-primary">{{ post.comments.count() }} Comments</span>
                 </a>
                 {% if post.author.id==current_user.id %}
-                <a class="label label-danger" href="{{ url_for('.post_delete',id=post.id, page=page) }}">
+                <a class="label label-danger" href="{{ url_for('.post_delete',id=post.id, page=page,path=request.path) }}">
                     Delete
                 </a>
                 {% endif %}

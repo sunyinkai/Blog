@@ -240,10 +240,11 @@ def comment_delete(id):  # the comment id
 @main.route('/post/delete/<int:id>')
 @login_required
 def post_delete(id):
+    path=request.args.get('path')
     u = Post.query.filter_by(id=id).first()
     username = u.author.username
     if u.author.id== current_user.id:
         db.session.delete(u)
         db.session.commit()
-        #  删除post后跳转有问题
-        return redirect(url_for('.user', username=username))
+        args = url_for('.user', username=username) if path != '/' else url_for('.index')
+        return redirect(args)
