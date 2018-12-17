@@ -292,6 +292,7 @@ db.event.listen(Comment.body, 'set', Comment.on_changed_body)
 class Problem(db.Model):
     __tablename__='problems'
     id=db.Column(db.Integer,primary_key=True)
+    isok=db.Column(db.Boolean, default=True)
     title=db.Column(db.Text)
     description=db.Column(db.Text)
     input_description=db.Column(db.Text)
