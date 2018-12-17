@@ -1,0 +1,7 @@
+*.pyc
+environ*
+*.sqlite
+*.sh
+debug.py
+not_do_list
+crawler.py
