@@ -108,3 +108,31 @@ div.flask-pagedown-preview h3 {
 .table.followers tr {
     border-bottom: 1px solid #e0e0e0;
 }
+
+
+
+body {
+	font-size: 14px;
+	margin-top:0px;
+}
+tr,td {
+	font-size: 14px;
+}
+h1 {
+	font-size: 18px;
+	font-weight: bold;
+}
+h2 {
+	font-size: 16px;
+	font-weight: bold;
+}
+h3 {
+	font-size: 14px;
+	font-weight: bold;
+}
+.box {
+	border: 1px solid;
+	height: 16px;
+}
+a {color:black;}
+a:hover {color:red; text-decoration:underline}

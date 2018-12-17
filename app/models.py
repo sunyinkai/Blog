@@ -287,3 +287,15 @@ class Comment(db.Model):
 
 
 db.event.listen(Comment.body, 'set', Comment.on_changed_body)
+
+
+class Problem(db.Model):
+    __tablename__='problems'
+    id=db.Column(db.Integer,primary_key=True)
+    title=db.Column(db.Text)
+    description=db.Column(db.Text)
+    input_description=db.Column(db.Text)
+    output_description=db.Column(db.Text)
+    input_sample=db.Column(db.Text)
+    output_sample=db.Column(db.Text)
+

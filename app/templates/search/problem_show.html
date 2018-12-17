@@ -1,0 +1,36 @@
+
+
+
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% import "_macros.html" as macros %}
+
+
+
+{% block title %}Flasky{% endblock %}
+
+{% block page_content %}
+
+<a href="{{url}}" style="color:blue">I wanna solve it!</a>
+
+
+<h1>{{title}}</h1>
+<h2>description</h2>
+<p>{{descripion|safe}}</p>
+<H2>Input</H2>
+ <p>{{input_description|safe}}</p>
+
+
+<h2>Output</h2>
+<p> {{output_descrition|safe}}</p>
+
+<h2>Sample Input</h2>
+<pre>{{input_sample}}
+</pre>
+
+<h2>Sample Output</h2>
+<pre>{{output_sample}}
+</pre>
+
+
+{% endblock %}
