@@ -32,6 +32,7 @@ def index():
     posts = pagination.items
     return render_template('index.html', form=form, show_followed=show_followed,
                            posts=posts, pagination=pagination, current_time=datetime.utcnow())
+    # return render_template('a.html')
 
 
 @main.route('/post_blog', methods=['GET', 'POST'])

@@ -1,0 +1,1317 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml" ng-app="NodApp" ng-controller="SimplifyController" class="ng-scope"><head><style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge; charset=UTF8" />
+    <title ng-bind="Title" class="ng-binding">题目-01游戏</title>
+
+    <link href="/css/bootstrap.min.css" rel="stylesheet" />
+<link href="/font-awesome/css/all.css" rel="stylesheet" />
+
+<!-- Toastr style -->
+<link href="/css/plugins/toastr/toastr.min.css" rel="stylesheet" />
+<!-- ct:summernote editor -->
+<link href="/css/plugins/summernote/summernote-bs3.css" rel="stylesheet" />
+<!-- Gritter -->
+<link href="/js/plugins/gritter/jquery.gritter.css" rel="stylesheet" />
+<!-- ct:Globals style -->
+<link href="/css/Globals.css" rel="stylesheet" />
+<!-- ct:51nod style -->
+<link href="/css/51nod.css?version=4" rel="stylesheet" />
+<!-- ct:icheck -->
+<link href="/css/plugins/iCheck/custom.css" rel="stylesheet" />
+<!-- ct:datatimepicker -->
+<link href="/css/plugins/datatimepicker/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+<!-- orris -->
+<link href="/css/plugins/morris/morris-0.4.3.min.css" rel="stylesheet" />
+<!-- Bootstrap select2 -->
+<link href="/css/plugins/select2/select2.min.css" rel="stylesheet" />
+<!-- Ladda -->
+<link href="/css/plugins/ladda/ladda-themeless.min.css" rel="stylesheet" />
+
+<link href="/css/animate.css" rel="stylesheet" />
+<link href="/css/style.css?version=4" rel="stylesheet" />
+
+    <!-- Mainly scripts -->
+<script src="/js/jquery-3.1.1.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- AngularJs -->
+<script src="/js/angular.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="/js/angular-sanitize.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Domain -->
+<script type="text/javascript" charset="utf-8">
+    document.domain = window.location.hostname.substring(window.location.hostname.indexOf('.') + 1);
+</script>
+
+<script src="/include/controller/nod-app.js?version=19" type="text/javascript" charset="utf-8"></script>
+<script src="/include/controller/tool.js?version=31" type="text/javascript" charset="utf-8"></script>
+<script src="/include/controller/filter.js?version=10" type="text/javascript" charset="utf-8"></script>
+
+
+<script type="text/x-mathjax-config;executed=true">
+    MathJax.Hub.Config({
+        tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+        processEscapes: true,
+        },
+        showProcessingMessages: false,
+        messageStyle: "none",
+        showMathMenu: false,
+        elements: [],
+    });
+</script>
+<script type="text/javascript" async="" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<style id="ace_editor.css">.ace_editor {position: relative;overflow: hidden;font: 12px/normal 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;direction: ltr;text-align: left;-webkit-tap-highlight-color: rgba(0, 0, 0, 0);}.ace_scroller {position: absolute;overflow: hidden;top: 0;bottom: 0;background-color: inherit;-ms-user-select: none;-moz-user-select: none;-webkit-user-select: none;user-select: none;cursor: text;}.ace_content {position: absolute;box-sizing: border-box;min-width: 100%;}.ace_dragging .ace_scroller:before{position: absolute;top: 0;left: 0;right: 0;bottom: 0;content: '';background: rgba(250, 250, 250, 0.01);z-index: 1000;}.ace_dragging.ace_dark .ace_scroller:before{background: rgba(0, 0, 0, 0.01);}.ace_selecting, .ace_selecting * {cursor: text !important;}.ace_gutter {position: absolute;overflow : hidden;width: auto;top: 0;bottom: 0;left: 0;cursor: default;z-index: 4;-ms-user-select: none;-moz-user-select: none;-webkit-user-select: none;user-select: none;}.ace_gutter-active-line {position: absolute;left: 0;right: 0;}.ace_scroller.ace_scroll-left {box-shadow: 17px 0 16px -16px rgba(0, 0, 0, 0.4) inset;}.ace_gutter-cell {padding-left: 19px;padding-right: 6px;background-repeat: no-repeat;}.ace_gutter-cell.ace_error {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAABOFBMVEX/////////QRswFAb/Ui4wFAYwFAYwFAaWGAfDRymzOSH/PxswFAb/SiUwFAYwFAbUPRvjQiDllog5HhHdRybsTi3/Tyv9Tir+Syj/UC3////XurebMBIwFAb/RSHbPx/gUzfdwL3kzMivKBAwFAbbvbnhPx66NhowFAYwFAaZJg8wFAaxKBDZurf/RB6mMxb/SCMwFAYwFAbxQB3+RB4wFAb/Qhy4Oh+4QifbNRcwFAYwFAYwFAb/QRzdNhgwFAYwFAbav7v/Uy7oaE68MBK5LxLewr/r2NXewLswFAaxJw4wFAbkPRy2PyYwFAaxKhLm1tMwFAazPiQwFAaUGAb/QBrfOx3bvrv/VC/maE4wFAbRPBq6MRO8Qynew8Dp2tjfwb0wFAbx6eju5+by6uns4uH9/f36+vr/GkHjAAAAYnRSTlMAGt+64rnWu/bo8eAA4InH3+DwoN7j4eLi4xP99Nfg4+b+/u9B/eDs1MD1mO7+4PHg2MXa347g7vDizMLN4eG+Pv7i5evs/v79yu7S3/DV7/498Yv24eH+4ufQ3Ozu/v7+y13sRqwAAADLSURBVHjaZc/XDsFgGIBhtDrshlitmk2IrbHFqL2pvXf/+78DPokj7+Fz9qpU/9UXJIlhmPaTaQ6QPaz0mm+5gwkgovcV6GZzd5JtCQwgsxoHOvJO15kleRLAnMgHFIESUEPmawB9ngmelTtipwwfASilxOLyiV5UVUyVAfbG0cCPHig+GBkzAENHS0AstVF6bacZIOzgLmxsHbt2OecNgJC83JERmePUYq8ARGkJx6XtFsdddBQgZE2nPR6CICZhawjA4Fb/chv+399kfR+MMMDGOQAAAABJRU5ErkJggg==");background-repeat: no-repeat;background-position: 2px center;}.ace_gutter-cell.ace_warning {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAmVBMVEX///8AAAD///8AAAAAAABPSzb/5sAAAAB/blH/73z/ulkAAAAAAAD85pkAAAAAAAACAgP/vGz/rkDerGbGrV7/pkQICAf////e0IsAAAD/oED/qTvhrnUAAAD/yHD/njcAAADuv2r/nz//oTj/p064oGf/zHAAAAA9Nir/tFIAAAD/tlTiuWf/tkIAAACynXEAAAAAAAAtIRW7zBpBAAAAM3RSTlMAABR1m7RXO8Ln31Z36zT+neXe5OzooRDfn+TZ4p3h2hTf4t3k3ucyrN1K5+Xaks52Sfs9CXgrAAAAjklEQVR42o3PbQ+CIBQFYEwboPhSYgoYunIqqLn6/z8uYdH8Vmdnu9vz4WwXgN/xTPRD2+sgOcZjsge/whXZgUaYYvT8QnuJaUrjrHUQreGczuEafQCO/SJTufTbroWsPgsllVhq3wJEk2jUSzX3CUEDJC84707djRc5MTAQxoLgupWRwW6UB5fS++NV8AbOZgnsC7BpEAAAAABJRU5ErkJggg==");background-position: 2px center;}.ace_gutter-cell.ace_info {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAAAAAA6mKC9AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAAJ0Uk5TAAB2k804AAAAPklEQVQY02NgIB68QuO3tiLznjAwpKTgNyDbMegwisCHZUETUZV0ZqOquBpXj2rtnpSJT1AEnnRmL2OgGgAAIKkRQap2htgAAAAASUVORK5CYII=");background-position: 2px center;}.ace_dark .ace_gutter-cell.ace_info {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAAJFBMVEUAAAChoaGAgIAqKiq+vr6tra1ZWVmUlJSbm5s8PDxubm56enrdgzg3AAAAAXRSTlMAQObYZgAAAClJREFUeNpjYMAPdsMYHegyJZFQBlsUlMFVCWUYKkAZMxZAGdxlDMQBAG+TBP4B6RyJAAAAAElFTkSuQmCC");}.ace_scrollbar {position: absolute;right: 0;bottom: 0;z-index: 6;}.ace_scrollbar-inner {position: absolute;cursor: text;left: 0;top: 0;}.ace_scrollbar-v{overflow-x: hidden;overflow-y: scroll;top: 0;}.ace_scrollbar-h {overflow-x: scroll;overflow-y: hidden;left: 0;}.ace_print-margin {position: absolute;height: 100%;}.ace_text-input {position: absolute;z-index: 0;width: 0.5em;height: 1em;opacity: 0;background: transparent;-moz-appearance: none;appearance: none;border: none;resize: none;outline: none;overflow: hidden;font: inherit;padding: 0 1px;margin: 0 -1px;text-indent: -1em;-ms-user-select: text;-moz-user-select: text;-webkit-user-select: text;user-select: text;white-space: pre!important;}.ace_text-input.ace_composition {background: inherit;color: inherit;z-index: 1000;opacity: 1;text-indent: 0;}[ace_nocontext=true] {transform: none!important;filter: none!important;perspective: none!important;clip-path: none!important;mask : none!important;contain: none!important;perspective: none!important;mix-blend-mode: initial!important;z-index: auto;}.ace_layer {z-index: 1;position: absolute;overflow: hidden;word-wrap: normal;white-space: pre;height: 100%;width: 100%;box-sizing: border-box;pointer-events: none;}.ace_gutter-layer {position: relative;width: auto;text-align: right;pointer-events: auto;}.ace_text-layer {font: inherit !important;}.ace_cjk {display: inline-block;text-align: center;}.ace_cursor-layer {z-index: 4;}.ace_cursor {z-index: 4;position: absolute;box-sizing: border-box;border-left: 2px solid;transform: translatez(0);}.ace_multiselect .ace_cursor {border-left-width: 1px;}.ace_slim-cursors .ace_cursor {border-left-width: 1px;}.ace_overwrite-cursors .ace_cursor {border-left-width: 0;border-bottom: 1px solid;}.ace_hidden-cursors .ace_cursor {opacity: 0.2;}.ace_smooth-blinking .ace_cursor {transition: opacity 0.18s;}.ace_animate-blinking .ace_cursor {animation-duration: 1000ms;animation-timing-function: step-end;animation-name: blink-ace-animate;animation-iteration-count: infinite;}.ace_animate-blinking.ace_smooth-blinking .ace_cursor {animation-duration: 1000ms;animation-timing-function: ease-in-out;animation-name: blink-ace-animate-smooth;}@keyframes blink-ace-animate {from, to { opacity: 1; }60% { opacity: 0; }}@keyframes blink-ace-animate-smooth {from, to { opacity: 1; }45% { opacity: 1; }60% { opacity: 0; }85% { opacity: 0; }}.ace_marker-layer .ace_step, .ace_marker-layer .ace_stack {position: absolute;z-index: 3;}.ace_marker-layer .ace_selection {position: absolute;z-index: 5;}.ace_marker-layer .ace_bracket {position: absolute;z-index: 6;}.ace_marker-layer .ace_active-line {position: absolute;z-index: 2;}.ace_marker-layer .ace_selected-word {position: absolute;z-index: 4;box-sizing: border-box;}.ace_line .ace_fold {box-sizing: border-box;display: inline-block;height: 11px;margin-top: -2px;vertical-align: middle;background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAAJCAYAAADU6McMAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAJpJREFUeNpi/P//PwOlgAXGYGRklAVSokD8GmjwY1wasKljQpYACtpCFeADcHVQfQyMQAwzwAZI3wJKvCLkfKBaMSClBlR7BOQikCFGQEErIH0VqkabiGCAqwUadAzZJRxQr/0gwiXIal8zQQPnNVTgJ1TdawL0T5gBIP1MUJNhBv2HKoQHHjqNrA4WO4zY0glyNKLT2KIfIMAAQsdgGiXvgnYAAAAASUVORK5CYII="),url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAA3CAYAAADNNiA5AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAACJJREFUeNpi+P//fxgTAwPDBxDxD078RSX+YeEyDFMCIMAAI3INmXiwf2YAAAAASUVORK5CYII=");background-repeat: no-repeat, repeat-x;background-position: center center, top left;color: transparent;border: 1px solid black;border-radius: 2px;cursor: pointer;pointer-events: auto;}.ace_dark .ace_fold {}.ace_fold:hover{background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAAJCAYAAADU6McMAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAJpJREFUeNpi/P//PwOlgAXGYGRklAVSokD8GmjwY1wasKljQpYACtpCFeADcHVQfQyMQAwzwAZI3wJKvCLkfKBaMSClBlR7BOQikCFGQEErIH0VqkabiGCAqwUadAzZJRxQr/0gwiXIal8zQQPnNVTgJ1TdawL0T5gBIP1MUJNhBv2HKoQHHjqNrA4WO4zY0glyNKLT2KIfIMAAQsdgGiXvgnYAAAAASUVORK5CYII="),url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAA3CAYAAADNNiA5AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAACBJREFUeNpi+P//fz4TAwPDZxDxD5X4i5fLMEwJgAADAEPVDbjNw87ZAAAAAElFTkSuQmCC");}.ace_tooltip {background-color: #FFF;background-image: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.1));border: 1px solid gray;border-radius: 1px;box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);color: black;max-width: 100%;padding: 3px 4px;position: fixed;z-index: 999999;box-sizing: border-box;cursor: default;white-space: pre;word-wrap: break-word;line-height: normal;font-style: normal;font-weight: normal;letter-spacing: normal;pointer-events: none;}.ace_folding-enabled &gt; .ace_gutter-cell {padding-right: 13px;}.ace_fold-widget {box-sizing: border-box;margin: 0 -12px 0 1px;display: none;width: 11px;vertical-align: top;background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAANElEQVR42mWKsQ0AMAzC8ixLlrzQjzmBiEjp0A6WwBCSPgKAXoLkqSot7nN3yMwR7pZ32NzpKkVoDBUxKAAAAABJRU5ErkJggg==");background-repeat: no-repeat;background-position: center;border-radius: 3px;border: 1px solid transparent;cursor: pointer;}.ace_folding-enabled .ace_fold-widget {display: inline-block;   }.ace_fold-widget.ace_end {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAANElEQVR42m3HwQkAMAhD0YzsRchFKI7sAikeWkrxwScEB0nh5e7KTPWimZki4tYfVbX+MNl4pyZXejUO1QAAAABJRU5ErkJggg==");}.ace_fold-widget.ace_closed {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAGCAYAAAAG5SQMAAAAOUlEQVR42jXKwQkAMAgDwKwqKD4EwQ26sSOkVWjgIIHAzPiCgaqiqnJHZnKICBERHN194O5b9vbLuAVRL+l0YWnZAAAAAElFTkSuQmCCXA==");}.ace_fold-widget:hover {border: 1px solid rgba(0, 0, 0, 0.3);background-color: rgba(255, 255, 255, 0.2);box-shadow: 0 1px 1px rgba(255, 255, 255, 0.7);}.ace_fold-widget:active {border: 1px solid rgba(0, 0, 0, 0.4);background-color: rgba(0, 0, 0, 0.05);box-shadow: 0 1px 1px rgba(255, 255, 255, 0.8);}.ace_dark .ace_fold-widget {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHklEQVQIW2P4//8/AzoGEQ7oGCaLLAhWiSwB146BAQCSTPYocqT0AAAAAElFTkSuQmCC");}.ace_dark .ace_fold-widget.ace_end {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAH0lEQVQIW2P4//8/AxQ7wNjIAjDMgC4AxjCVKBirIAAF0kz2rlhxpAAAAABJRU5ErkJggg==");}.ace_dark .ace_fold-widget.ace_closed {background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAFCAYAAACAcVaiAAAAHElEQVQIW2P4//+/AxAzgDADlOOAznHAKgPWAwARji8UIDTfQQAAAABJRU5ErkJggg==");}.ace_dark .ace_fold-widget:hover {box-shadow: 0 1px 1px rgba(255, 255, 255, 0.2);background-color: rgba(255, 255, 255, 0.1);}.ace_dark .ace_fold-widget:active {box-shadow: 0 1px 1px rgba(255, 255, 255, 0.2);}.ace_inline_button {border: 1px solid lightgray;display: inline-block;margin: -1px 8px;padding: 0 5px;pointer-events: auto;cursor: pointer;}.ace_inline_button:hover {border-color: gray;background: rgba(200,200,200,0.2);display: inline-block;pointer-events: auto;}.ace_fold-widget.ace_invalid {background-color: #FFB4B4;border-color: #DE5555;}.ace_fade-fold-widgets .ace_fold-widget {transition: opacity 0.4s ease 0.05s;opacity: 0;}.ace_fade-fold-widgets:hover .ace_fold-widget {transition: opacity 0.05s ease 0.05s;opacity:1;}.ace_underline {text-decoration: underline;}.ace_bold {font-weight: bold;}.ace_nobold .ace_bold {font-weight: normal;}.ace_italic {font-style: italic;}.ace_error-marker {background-color: rgba(255, 0, 0,0.2);position: absolute;z-index: 9;}.ace_highlight-marker {background-color: rgba(255, 255, 0,0.2);position: absolute;z-index: 8;}.ace_br1 {border-top-left-radius    : 3px;}.ace_br2 {border-top-right-radius   : 3px;}.ace_br3 {border-top-left-radius    : 3px; border-top-right-radius:    3px;}.ace_br4 {border-bottom-right-radius: 3px;}.ace_br5 {border-top-left-radius    : 3px; border-bottom-right-radius: 3px;}.ace_br6 {border-top-right-radius   : 3px; border-bottom-right-radius: 3px;}.ace_br7 {border-top-left-radius    : 3px; border-top-right-radius:    3px; border-bottom-right-radius: 3px;}.ace_br8 {border-bottom-left-radius : 3px;}.ace_br9 {border-top-left-radius    : 3px; border-bottom-left-radius:  3px;}.ace_br10{border-top-right-radius   : 3px; border-bottom-left-radius:  3px;}.ace_br11{border-top-left-radius    : 3px; border-top-right-radius:    3px; border-bottom-left-radius:  3px;}.ace_br12{border-bottom-right-radius: 3px; border-bottom-left-radius:  3px;}.ace_br13{border-top-left-radius    : 3px; border-bottom-right-radius: 3px; border-bottom-left-radius:  3px;}.ace_br14{border-top-right-radius   : 3px; border-bottom-right-radius: 3px; border-bottom-left-radius:  3px;}.ace_br15{border-top-left-radius    : 3px; border-top-right-radius:    3px; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px;}.ace_text-input-ios {position: absolute !important;top: -100000px !important;left: -100000px !important;}
+/*# sourceURL=ace/css/ace_editor.css */</style><style id="ace-tm">.ace-tm .ace_gutter {background: #f0f0f0;color: #333;}.ace-tm .ace_print-margin {width: 1px;background: #e8e8e8;}.ace-tm .ace_fold {background-color: #6B72E6;}.ace-tm {background-color: #FFFFFF;color: black;}.ace-tm .ace_cursor {color: black;}.ace-tm .ace_invisible {color: rgb(191, 191, 191);}.ace-tm .ace_storage,.ace-tm .ace_keyword {color: blue;}.ace-tm .ace_constant {color: rgb(197, 6, 11);}.ace-tm .ace_constant.ace_buildin {color: rgb(88, 72, 246);}.ace-tm .ace_constant.ace_language {color: rgb(88, 92, 246);}.ace-tm .ace_constant.ace_library {color: rgb(6, 150, 14);}.ace-tm .ace_invalid {background-color: rgba(255, 0, 0, 0.1);color: red;}.ace-tm .ace_support.ace_function {color: rgb(60, 76, 114);}.ace-tm .ace_support.ace_constant {color: rgb(6, 150, 14);}.ace-tm .ace_support.ace_type,.ace-tm .ace_support.ace_class {color: rgb(109, 121, 222);}.ace-tm .ace_keyword.ace_operator {color: rgb(104, 118, 135);}.ace-tm .ace_string {color: rgb(3, 106, 7);}.ace-tm .ace_comment {color: rgb(76, 136, 107);}.ace-tm .ace_comment.ace_doc {color: rgb(0, 102, 255);}.ace-tm .ace_comment.ace_doc.ace_tag {color: rgb(128, 159, 191);}.ace-tm .ace_constant.ace_numeric {color: rgb(0, 0, 205);}.ace-tm .ace_variable {color: rgb(49, 132, 149);}.ace-tm .ace_xml-pe {color: rgb(104, 104, 91);}.ace-tm .ace_entity.ace_name.ace_function {color: #0000A2;}.ace-tm .ace_heading {color: rgb(12, 7, 255);}.ace-tm .ace_list {color:rgb(185, 6, 144);}.ace-tm .ace_meta.ace_tag {color:rgb(0, 22, 142);}.ace-tm .ace_string.ace_regex {color: rgb(255, 0, 0)}.ace-tm .ace_marker-layer .ace_selection {background: rgb(181, 213, 255);}.ace-tm.ace_multiselect .ace_selection.ace_start {box-shadow: 0 0 3px 0px white;}.ace-tm .ace_marker-layer .ace_step {background: rgb(252, 255, 0);}.ace-tm .ace_marker-layer .ace_stack {background: rgb(164, 229, 101);}.ace-tm .ace_marker-layer .ace_bracket {margin: -1px 0 0 -1px;border: 1px solid rgb(192, 192, 192);}.ace-tm .ace_marker-layer .ace_active-line {background: rgba(0, 0, 0, 0.07);}.ace-tm .ace_gutter-active-line {background-color : #dcdcdc;}.ace-tm .ace_marker-layer .ace_selected-word {background: rgb(250, 250, 255);border: 1px solid rgb(200, 200, 250);}.ace-tm .ace_indent-guide {background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAE0lEQVQImWP4////f4bLly//BwAmVgd1/w11/gAAAABJRU5ErkJggg==") right repeat-y;}
+/*# sourceURL=ace/css/ace-tm */</style><style>    .error_widget_wrapper {        background: inherit;        color: inherit;        border:none    }    .error_widget {        border-top: solid 2px;        border-bottom: solid 2px;        margin: 5px 0;        padding: 10px 40px;        white-space: pre-wrap;    }    .error_widget.ace_error, .error_widget_arrow.ace_error{        border-color: #ff5a5a    }    .error_widget.ace_warning, .error_widget_arrow.ace_warning{        border-color: #F1D817    }    .error_widget.ace_info, .error_widget_arrow.ace_info{        border-color: #5a5a5a    }    .error_widget.ace_ok, .error_widget_arrow.ace_ok{        border-color: #5aaa5a    }    .error_widget_arrow {        position: absolute;        border: solid 5px;        border-top-color: transparent!important;        border-right-color: transparent!important;        border-left-color: transparent!important;        top: -5px;    }</style><style>.ace_snippet-marker {    -moz-box-sizing: border-box;    box-sizing: border-box;    background: rgba(194, 193, 208, 0.09);    border: 1px dotted rgba(211, 208, 235, 0.62);    position: absolute;}</style><style>.ace_editor.ace_autocomplete .ace_marker-layer .ace_active-line {    background-color: #CAD6FA;    z-index: 1;}.ace_editor.ace_autocomplete .ace_line-hover {    border: 1px solid #abbffe;    margin-top: -1px;    background: rgba(233,233,253,0.4);}.ace_editor.ace_autocomplete .ace_line-hover {    position: absolute;    z-index: 2;}.ace_editor.ace_autocomplete .ace_scroller {   background: none;   border: none;   box-shadow: none;}.ace_rightAlignedText {    color: gray;    display: inline-block;    position: absolute;    right: 4px;    text-align: right;    z-index: -1;}.ace_editor.ace_autocomplete .ace_completion-highlight{    color: #000;    text-shadow: 0 0 0.01em;}.ace_editor.ace_autocomplete {    width: 280px;    z-index: 200000;    background: #fbfbfb;    color: #444;    border: 1px lightgray solid;    position: fixed;    box-shadow: 2px 3px 5px rgba(0,0,0,.2);    line-height: 1.4;}</style><style>@-webkit-keyframes swal2-show{0%{-webkit-transform:scale(.7);transform:scale(.7)}45%{-webkit-transform:scale(1.05);transform:scale(1.05)}80%{-webkit-transform:scale(.95);transform:scale(.95)}100%{-webkit-transform:scale(1);transform:scale(1)}}@keyframes swal2-show{0%{-webkit-transform:scale(.7);transform:scale(.7)}45%{-webkit-transform:scale(1.05);transform:scale(1.05)}80%{-webkit-transform:scale(.95);transform:scale(.95)}100%{-webkit-transform:scale(1);transform:scale(1)}}@-webkit-keyframes swal2-hide{0%{-webkit-transform:scale(1);transform:scale(1);opacity:1}100%{-webkit-transform:scale(.5);transform:scale(.5);opacity:0}}@keyframes swal2-hide{0%{-webkit-transform:scale(1);transform:scale(1);opacity:1}100%{-webkit-transform:scale(.5);transform:scale(.5);opacity:0}}@-webkit-keyframes swal2-animate-success-line-tip{0%{top:1.1875em;left:.0625em;width:0}54%{top:1.0625em;left:.125em;width:0}70%{top:2.1875em;left:-.375em;width:3.125em}84%{top:3em;left:1.3125em;width:1.0625em}100%{top:2.8125em;left:.875em;width:1.5625em}}@keyframes swal2-animate-success-line-tip{0%{top:1.1875em;left:.0625em;width:0}54%{top:1.0625em;left:.125em;width:0}70%{top:2.1875em;left:-.375em;width:3.125em}84%{top:3em;left:1.3125em;width:1.0625em}100%{top:2.8125em;left:.875em;width:1.5625em}}@-webkit-keyframes swal2-animate-success-line-long{0%{top:3.375em;right:2.875em;width:0}65%{top:3.375em;right:2.875em;width:0}84%{top:2.1875em;right:0;width:3.4375em}100%{top:2.375em;right:.5em;width:2.9375em}}@keyframes swal2-animate-success-line-long{0%{top:3.375em;right:2.875em;width:0}65%{top:3.375em;right:2.875em;width:0}84%{top:2.1875em;right:0;width:3.4375em}100%{top:2.375em;right:.5em;width:2.9375em}}@-webkit-keyframes swal2-rotate-success-circular-line{0%{-webkit-transform:rotate(-45deg);transform:rotate(-45deg)}5%{-webkit-transform:rotate(-45deg);transform:rotate(-45deg)}12%{-webkit-transform:rotate(-405deg);transform:rotate(-405deg)}100%{-webkit-transform:rotate(-405deg);transform:rotate(-405deg)}}@keyframes swal2-rotate-success-circular-line{0%{-webkit-transform:rotate(-45deg);transform:rotate(-45deg)}5%{-webkit-transform:rotate(-45deg);transform:rotate(-45deg)}12%{-webkit-transform:rotate(-405deg);transform:rotate(-405deg)}100%{-webkit-transform:rotate(-405deg);transform:rotate(-405deg)}}@-webkit-keyframes swal2-animate-error-x-mark{0%{margin-top:1.625em;-webkit-transform:scale(.4);transform:scale(.4);opacity:0}50%{margin-top:1.625em;-webkit-transform:scale(.4);transform:scale(.4);opacity:0}80%{margin-top:-.375em;-webkit-transform:scale(1.15);transform:scale(1.15)}100%{margin-top:0;-webkit-transform:scale(1);transform:scale(1);opacity:1}}@keyframes swal2-animate-error-x-mark{0%{margin-top:1.625em;-webkit-transform:scale(.4);transform:scale(.4);opacity:0}50%{margin-top:1.625em;-webkit-transform:scale(.4);transform:scale(.4);opacity:0}80%{margin-top:-.375em;-webkit-transform:scale(1.15);transform:scale(1.15)}100%{margin-top:0;-webkit-transform:scale(1);transform:scale(1);opacity:1}}@-webkit-keyframes swal2-animate-error-icon{0%{-webkit-transform:rotateX(100deg);transform:rotateX(100deg);opacity:0}100%{-webkit-transform:rotateX(0);transform:rotateX(0);opacity:1}}@keyframes swal2-animate-error-icon{0%{-webkit-transform:rotateX(100deg);transform:rotateX(100deg);opacity:0}100%{-webkit-transform:rotateX(0);transform:rotateX(0);opacity:1}}body.swal2-toast-shown .swal2-container{position:fixed;background-color:transparent}body.swal2-toast-shown .swal2-container.swal2-shown{background-color:transparent}body.swal2-toast-shown .swal2-container.swal2-top{top:0;right:auto;bottom:auto;left:50%;-webkit-transform:translateX(-50%);transform:translateX(-50%)}body.swal2-toast-shown .swal2-container.swal2-top-end,body.swal2-toast-shown .swal2-container.swal2-top-right{top:0;right:0;bottom:auto;left:auto}body.swal2-toast-shown .swal2-container.swal2-top-left,body.swal2-toast-shown .swal2-container.swal2-top-start{top:0;right:auto;bottom:auto;left:0}body.swal2-toast-shown .swal2-container.swal2-center-left,body.swal2-toast-shown .swal2-container.swal2-center-start{top:50%;right:auto;bottom:auto;left:0;-webkit-transform:translateY(-50%);transform:translateY(-50%)}body.swal2-toast-shown .swal2-container.swal2-center{top:50%;right:auto;bottom:auto;left:50%;-webkit-transform:translate(-50%,-50%);transform:translate(-50%,-50%)}body.swal2-toast-shown .swal2-container.swal2-center-end,body.swal2-toast-shown .swal2-container.swal2-center-right{top:50%;right:0;bottom:auto;left:auto;-webkit-transform:translateY(-50%);transform:translateY(-50%)}body.swal2-toast-shown .swal2-container.swal2-bottom-left,body.swal2-toast-shown .swal2-container.swal2-bottom-start{top:auto;right:auto;bottom:0;left:0}body.swal2-toast-shown .swal2-container.swal2-bottom{top:auto;right:auto;bottom:0;left:50%;-webkit-transform:translateX(-50%);transform:translateX(-50%)}body.swal2-toast-shown .swal2-container.swal2-bottom-end,body.swal2-toast-shown .swal2-container.swal2-bottom-right{top:auto;right:0;bottom:0;left:auto}body.swal2-toast-column .swal2-toast{flex-direction:column;align-items:stretch}body.swal2-toast-column .swal2-toast .swal2-actions{flex:1;align-self:stretch;height:2.2em;margin-top:.3125em}body.swal2-toast-column .swal2-toast .swal2-loading{justify-content:center}body.swal2-toast-column .swal2-toast .swal2-input{height:2em;margin:.3125em auto;font-size:1em}body.swal2-toast-column .swal2-toast .swal2-validation-message{font-size:1em}.swal2-popup.swal2-toast{flex-direction:row;align-items:center;width:auto;padding:.625em;box-shadow:0 0 .625em #d9d9d9;overflow-y:hidden}.swal2-popup.swal2-toast .swal2-header{flex-direction:row}.swal2-popup.swal2-toast .swal2-title{flex-grow:1;justify-content:flex-start;margin:0 .6em;font-size:1em}.swal2-popup.swal2-toast .swal2-footer{margin:.5em 0 0;padding:.5em 0 0;font-size:.8em}.swal2-popup.swal2-toast .swal2-close{position:initial;width:.8em;height:.8em;line-height:.8}.swal2-popup.swal2-toast .swal2-content{justify-content:flex-start;font-size:1em}.swal2-popup.swal2-toast .swal2-icon{width:2em;min-width:2em;height:2em;margin:0}.swal2-popup.swal2-toast .swal2-icon-text{font-size:2em;font-weight:700;line-height:1em}.swal2-popup.swal2-toast .swal2-icon.swal2-success .swal2-success-ring{width:2em;height:2em}.swal2-popup.swal2-toast .swal2-icon.swal2-error [class^=swal2-x-mark-line]{top:.875em;width:1.375em}.swal2-popup.swal2-toast .swal2-icon.swal2-error [class^=swal2-x-mark-line][class$=left]{left:.3125em}.swal2-popup.swal2-toast .swal2-icon.swal2-error [class^=swal2-x-mark-line][class$=right]{right:.3125em}.swal2-popup.swal2-toast .swal2-actions{height:auto;margin:0 .3125em}.swal2-popup.swal2-toast .swal2-styled{margin:0 .3125em;padding:.3125em .625em;font-size:1em}.swal2-popup.swal2-toast .swal2-styled:focus{box-shadow:0 0 0 .0625em #fff,0 0 0 .125em rgba(50,100,150,.4)}.swal2-popup.swal2-toast .swal2-success{border-color:#a5dc86}.swal2-popup.swal2-toast .swal2-success [class^=swal2-success-circular-line]{position:absolute;width:2em;height:2.8125em;-webkit-transform:rotate(45deg);transform:rotate(45deg);border-radius:50%}.swal2-popup.swal2-toast .swal2-success [class^=swal2-success-circular-line][class$=left]{top:-.25em;left:-.9375em;-webkit-transform:rotate(-45deg);transform:rotate(-45deg);-webkit-transform-origin:2em 2em;transform-origin:2em 2em;border-radius:4em 0 0 4em}.swal2-popup.swal2-toast .swal2-success [class^=swal2-success-circular-line][class$=right]{top:-.25em;left:.9375em;-webkit-transform-origin:0 2em;transform-origin:0 2em;border-radius:0 4em 4em 0}.swal2-popup.swal2-toast .swal2-success .swal2-success-ring{width:2em;height:2em}.swal2-popup.swal2-toast .swal2-success .swal2-success-fix{top:0;left:.4375em;width:.4375em;height:2.6875em}.swal2-popup.swal2-toast .swal2-success [class^=swal2-success-line]{height:.3125em}.swal2-popup.swal2-toast .swal2-success [class^=swal2-success-line][class$=tip]{top:1.125em;left:.1875em;width:.75em}.swal2-popup.swal2-toast .swal2-success [class^=swal2-success-line][class$=long]{top:.9375em;right:.1875em;width:1.375em}.swal2-popup.swal2-toast.swal2-show{-webkit-animation:showSweetToast .5s;animation:showSweetToast .5s}.swal2-popup.swal2-toast.swal2-hide{-webkit-animation:hideSweetToast .2s forwards;animation:hideSweetToast .2s forwards}.swal2-popup.swal2-toast .swal2-animate-success-icon .swal2-success-line-tip{-webkit-animation:animate-toast-success-tip .75s;animation:animate-toast-success-tip .75s}.swal2-popup.swal2-toast .swal2-animate-success-icon .swal2-success-line-long{-webkit-animation:animate-toast-success-long .75s;animation:animate-toast-success-long .75s}@-webkit-keyframes showSweetToast{0%{-webkit-transform:translateY(-.625em) rotateZ(2deg);transform:translateY(-.625em) rotateZ(2deg);opacity:0}33%{-webkit-transform:translateY(0) rotateZ(-2deg);transform:translateY(0) rotateZ(-2deg);opacity:.5}66%{-webkit-transform:translateY(.3125em) rotateZ(2deg);transform:translateY(.3125em) rotateZ(2deg);opacity:.7}100%{-webkit-transform:translateY(0) rotateZ(0);transform:translateY(0) rotateZ(0);opacity:1}}@keyframes showSweetToast{0%{-webkit-transform:translateY(-.625em) rotateZ(2deg);transform:translateY(-.625em) rotateZ(2deg);opacity:0}33%{-webkit-transform:translateY(0) rotateZ(-2deg);transform:translateY(0) rotateZ(-2deg);opacity:.5}66%{-webkit-transform:translateY(.3125em) rotateZ(2deg);transform:translateY(.3125em) rotateZ(2deg);opacity:.7}100%{-webkit-transform:translateY(0) rotateZ(0);transform:translateY(0) rotateZ(0);opacity:1}}@-webkit-keyframes hideSweetToast{0%{opacity:1}33%{opacity:.5}100%{-webkit-transform:rotateZ(1deg);transform:rotateZ(1deg);opacity:0}}@keyframes hideSweetToast{0%{opacity:1}33%{opacity:.5}100%{-webkit-transform:rotateZ(1deg);transform:rotateZ(1deg);opacity:0}}@-webkit-keyframes animate-toast-success-tip{0%{top:.5625em;left:.0625em;width:0}54%{top:.125em;left:.125em;width:0}70%{top:.625em;left:-.25em;width:1.625em}84%{top:1.0625em;left:.75em;width:.5em}100%{top:1.125em;left:.1875em;width:.75em}}@keyframes animate-toast-success-tip{0%{top:.5625em;left:.0625em;width:0}54%{top:.125em;left:.125em;width:0}70%{top:.625em;left:-.25em;width:1.625em}84%{top:1.0625em;left:.75em;width:.5em}100%{top:1.125em;left:.1875em;width:.75em}}@-webkit-keyframes animate-toast-success-long{0%{top:1.625em;right:1.375em;width:0}65%{top:1.25em;right:.9375em;width:0}84%{top:.9375em;right:0;width:1.125em}100%{top:.9375em;right:.1875em;width:1.375em}}@keyframes animate-toast-success-long{0%{top:1.625em;right:1.375em;width:0}65%{top:1.25em;right:.9375em;width:0}84%{top:.9375em;right:0;width:1.125em}100%{top:.9375em;right:.1875em;width:1.375em}}body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown){overflow:hidden}body.swal2-height-auto{height:auto!important}body.swal2-no-backdrop .swal2-shown{top:auto;right:auto;bottom:auto;left:auto;background-color:transparent}body.swal2-no-backdrop .swal2-shown&gt;.swal2-modal{box-shadow:0 0 10px rgba(0,0,0,.4)}body.swal2-no-backdrop .swal2-shown.swal2-top{top:0;left:50%;-webkit-transform:translateX(-50%);transform:translateX(-50%)}body.swal2-no-backdrop .swal2-shown.swal2-top-left,body.swal2-no-backdrop .swal2-shown.swal2-top-start{top:0;left:0}body.swal2-no-backdrop .swal2-shown.swal2-top-end,body.swal2-no-backdrop .swal2-shown.swal2-top-right{top:0;right:0}body.swal2-no-backdrop .swal2-shown.swal2-center{top:50%;left:50%;-webkit-transform:translate(-50%,-50%);transform:translate(-50%,-50%)}body.swal2-no-backdrop .swal2-shown.swal2-center-left,body.swal2-no-backdrop .swal2-shown.swal2-center-start{top:50%;left:0;-webkit-transform:translateY(-50%);transform:translateY(-50%)}body.swal2-no-backdrop .swal2-shown.swal2-center-end,body.swal2-no-backdrop .swal2-shown.swal2-center-right{top:50%;right:0;-webkit-transform:translateY(-50%);transform:translateY(-50%)}body.swal2-no-backdrop .swal2-shown.swal2-bottom{bottom:0;left:50%;-webkit-transform:translateX(-50%);transform:translateX(-50%)}body.swal2-no-backdrop .swal2-shown.swal2-bottom-left,body.swal2-no-backdrop .swal2-shown.swal2-bottom-start{bottom:0;left:0}body.swal2-no-backdrop .swal2-shown.swal2-bottom-end,body.swal2-no-backdrop .swal2-shown.swal2-bottom-right{right:0;bottom:0}.swal2-container{display:flex;position:fixed;top:0;right:0;bottom:0;left:0;flex-direction:row;align-items:center;justify-content:center;padding:10px;background-color:transparent;z-index:99999;overflow-x:hidden;-webkit-overflow-scrolling:touch}.swal2-container.swal2-top{align-items:flex-start}.swal2-container.swal2-top-left,.swal2-container.swal2-top-start{align-items:flex-start;justify-content:flex-start}.swal2-container.swal2-top-end,.swal2-container.swal2-top-right{align-items:flex-start;justify-content:flex-end}.swal2-container.swal2-center{align-items:center}.swal2-container.swal2-center-left,.swal2-container.swal2-center-start{align-items:center;justify-content:flex-start}.swal2-container.swal2-center-end,.swal2-container.swal2-center-right{align-items:center;justify-content:flex-end}.swal2-container.swal2-bottom{align-items:flex-end}.swal2-container.swal2-bottom-left,.swal2-container.swal2-bottom-start{align-items:flex-end;justify-content:flex-start}.swal2-container.swal2-bottom-end,.swal2-container.swal2-bottom-right{align-items:flex-end;justify-content:flex-end}.swal2-container.swal2-grow-fullscreen&gt;.swal2-modal{display:flex!important;flex:1;align-self:stretch;justify-content:center}.swal2-container.swal2-grow-row&gt;.swal2-modal{display:flex!important;flex:1;align-content:center;justify-content:center}.swal2-container.swal2-grow-column{flex:1;flex-direction:column}.swal2-container.swal2-grow-column.swal2-bottom,.swal2-container.swal2-grow-column.swal2-center,.swal2-container.swal2-grow-column.swal2-top{align-items:center}.swal2-container.swal2-grow-column.swal2-bottom-left,.swal2-container.swal2-grow-column.swal2-bottom-start,.swal2-container.swal2-grow-column.swal2-center-left,.swal2-container.swal2-grow-column.swal2-center-start,.swal2-container.swal2-grow-column.swal2-top-left,.swal2-container.swal2-grow-column.swal2-top-start{align-items:flex-start}.swal2-container.swal2-grow-column.swal2-bottom-end,.swal2-container.swal2-grow-column.swal2-bottom-right,.swal2-container.swal2-grow-column.swal2-center-end,.swal2-container.swal2-grow-column.swal2-center-right,.swal2-container.swal2-grow-column.swal2-top-end,.swal2-container.swal2-grow-column.swal2-top-right{align-items:flex-end}.swal2-container.swal2-grow-column&gt;.swal2-modal{display:flex!important;flex:1;align-content:center;justify-content:center}.swal2-container:not(.swal2-top):not(.swal2-top-start):not(.swal2-top-end):not(.swal2-top-left):not(.swal2-top-right):not(.swal2-center-start):not(.swal2-center-end):not(.swal2-center-left):not(.swal2-center-right):not(.swal2-bottom):not(.swal2-bottom-start):not(.swal2-bottom-end):not(.swal2-bottom-left):not(.swal2-bottom-right):not(.swal2-grow-fullscreen)&gt;.swal2-modal{margin:auto}@media all and (-ms-high-contrast:none),(-ms-high-contrast:active){.swal2-container .swal2-modal{margin:0!important}}.swal2-container.swal2-fade{transition:background-color .1s}.swal2-container.swal2-shown{background-color:rgba(0,0,0,.4)}.swal2-popup{display:none;position:relative;flex-direction:column;justify-content:center;width:32em;max-width:100%;padding:1.25em;border-radius:.3125em;background:#fff;font-family:inherit;font-size:1em;box-sizing:border-box}.swal2-popup:focus{outline:0}.swal2-popup.swal2-loading{overflow-y:hidden}.swal2-popup .swal2-header{display:flex;flex-direction:column;align-items:center}.swal2-popup .swal2-title{display:block;position:relative;max-width:100%;margin:0 0 .4em;padding:0;color:#595959;font-size:1.875em;font-weight:600;text-align:center;text-transform:none;word-wrap:break-word}.swal2-popup .swal2-actions{flex-wrap:wrap;align-items:center;justify-content:center;margin:1.25em auto 0;z-index:1}.swal2-popup .swal2-actions:not(.swal2-loading) .swal2-styled[disabled]{opacity:.4}.swal2-popup .swal2-actions:not(.swal2-loading) .swal2-styled:hover{background-image:linear-gradient(rgba(0,0,0,.1),rgba(0,0,0,.1))}.swal2-popup .swal2-actions:not(.swal2-loading) .swal2-styled:active{background-image:linear-gradient(rgba(0,0,0,.2),rgba(0,0,0,.2))}.swal2-popup .swal2-actions.swal2-loading .swal2-styled.swal2-confirm{width:2.5em;height:2.5em;margin:.46875em;padding:0;border:.25em solid transparent;border-radius:100%;border-color:transparent;background-color:transparent!important;color:transparent;cursor:default;box-sizing:border-box;-webkit-animation:swal2-rotate-loading 1.5s linear 0s infinite normal;animation:swal2-rotate-loading 1.5s linear 0s infinite normal;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.swal2-popup .swal2-actions.swal2-loading .swal2-styled.swal2-cancel{margin-right:30px;margin-left:30px}.swal2-popup .swal2-actions.swal2-loading :not(.swal2-styled).swal2-confirm::after{display:inline-block;width:15px;height:15px;margin-left:5px;border:3px solid #999;border-radius:50%;border-right-color:transparent;box-shadow:1px 1px 1px #fff;content:'';-webkit-animation:swal2-rotate-loading 1.5s linear 0s infinite normal;animation:swal2-rotate-loading 1.5s linear 0s infinite normal}.swal2-popup .swal2-styled{margin:.3125em;padding:.625em 2em;font-weight:500;box-shadow:none}.swal2-popup .swal2-styled:not([disabled]){cursor:pointer}.swal2-popup .swal2-styled.swal2-confirm{border:0;border-radius:.25em;background:initial;background-color:#3085d6;color:#fff;font-size:1.0625em}.swal2-popup .swal2-styled.swal2-cancel{border:0;border-radius:.25em;background:initial;background-color:#aaa;color:#fff;font-size:1.0625em}.swal2-popup .swal2-styled:focus{outline:0;box-shadow:0 0 0 2px #fff,0 0 0 4px rgba(50,100,150,.4)}.swal2-popup .swal2-styled::-moz-focus-inner{border:0}.swal2-popup .swal2-footer{justify-content:center;margin:1.25em 0 0;padding:1em 0 0;border-top:1px solid #eee;color:#545454;font-size:1em}.swal2-popup .swal2-image{max-width:100%;margin:1.25em auto}.swal2-popup .swal2-close{position:absolute;top:0;right:0;justify-content:center;width:1.2em;height:1.2em;padding:0;transition:color .1s ease-out;border:none;border-radius:0;background:0 0;color:#ccc;font-family:serif;font-size:2.5em;line-height:1.2;cursor:pointer;overflow:hidden}.swal2-popup .swal2-close:hover{-webkit-transform:none;transform:none;color:#f27474}.swal2-popup&gt;.swal2-checkbox,.swal2-popup&gt;.swal2-file,.swal2-popup&gt;.swal2-input,.swal2-popup&gt;.swal2-radio,.swal2-popup&gt;.swal2-select,.swal2-popup&gt;.swal2-textarea{display:none}.swal2-popup .swal2-content{justify-content:center;margin:0;padding:0;color:#545454;font-size:1.125em;font-weight:300;line-height:normal;z-index:1;word-wrap:break-word}.swal2-popup #swal2-content{text-align:center}.swal2-popup .swal2-checkbox,.swal2-popup .swal2-file,.swal2-popup .swal2-input,.swal2-popup .swal2-radio,.swal2-popup .swal2-select,.swal2-popup .swal2-textarea{margin:1em auto}.swal2-popup .swal2-file,.swal2-popup .swal2-input,.swal2-popup .swal2-textarea{width:100%;transition:border-color .3s,box-shadow .3s;border:1px solid #d9d9d9;border-radius:.1875em;font-size:1.125em;box-shadow:inset 0 1px 1px rgba(0,0,0,.06);box-sizing:border-box}.swal2-popup .swal2-file.swal2-inputerror,.swal2-popup .swal2-input.swal2-inputerror,.swal2-popup .swal2-textarea.swal2-inputerror{border-color:#f27474!important;box-shadow:0 0 2px #f27474!important}.swal2-popup .swal2-file:focus,.swal2-popup .swal2-input:focus,.swal2-popup .swal2-textarea:focus{border:1px solid #b4dbed;outline:0;box-shadow:0 0 3px #c4e6f5}.swal2-popup .swal2-file::-webkit-input-placeholder,.swal2-popup .swal2-input::-webkit-input-placeholder,.swal2-popup .swal2-textarea::-webkit-input-placeholder{color:#ccc}.swal2-popup .swal2-file:-ms-input-placeholder,.swal2-popup .swal2-input:-ms-input-placeholder,.swal2-popup .swal2-textarea:-ms-input-placeholder{color:#ccc}.swal2-popup .swal2-file::-ms-input-placeholder,.swal2-popup .swal2-input::-ms-input-placeholder,.swal2-popup .swal2-textarea::-ms-input-placeholder{color:#ccc}.swal2-popup .swal2-file::placeholder,.swal2-popup .swal2-input::placeholder,.swal2-popup .swal2-textarea::placeholder{color:#ccc}.swal2-popup .swal2-range input{width:80%}.swal2-popup .swal2-range output{width:20%;font-weight:600;text-align:center}.swal2-popup .swal2-range input,.swal2-popup .swal2-range output{height:2.625em;margin:1em auto;padding:0;font-size:1.125em;line-height:2.625em}.swal2-popup .swal2-input{height:2.625em;padding:0 .75em}.swal2-popup .swal2-input[type=number]{max-width:10em}.swal2-popup .swal2-file{font-size:1.125em}.swal2-popup .swal2-textarea{height:6.75em;padding:.75em}.swal2-popup .swal2-select{min-width:50%;max-width:100%;padding:.375em .625em;color:#545454;font-size:1.125em}.swal2-popup .swal2-checkbox,.swal2-popup .swal2-radio{align-items:center;justify-content:center}.swal2-popup .swal2-checkbox label,.swal2-popup .swal2-radio label{margin:0 .6em;font-size:1.125em}.swal2-popup .swal2-checkbox input,.swal2-popup .swal2-radio input{margin:0 .4em}.swal2-popup .swal2-validation-message{display:none;align-items:center;justify-content:center;padding:.625em;background:#f0f0f0;color:#666;font-size:1em;font-weight:300;overflow:hidden}.swal2-popup .swal2-validation-message::before{display:inline-block;width:1.5em;min-width:1.5em;height:1.5em;margin:0 .625em;border-radius:50%;background-color:#f27474;color:#fff;font-weight:600;line-height:1.5em;text-align:center;content:'!';zoom:normal}@supports (-ms-accelerator:true){.swal2-range input{width:100%!important}.swal2-range output{display:none}}@media all and (-ms-high-contrast:none),(-ms-high-contrast:active){.swal2-range input{width:100%!important}.swal2-range output{display:none}}@-moz-document url-prefix(){.swal2-close:focus{outline:2px solid rgba(50,100,150,.4)}}.swal2-icon{position:relative;justify-content:center;width:5em;height:5em;margin:1.25em auto 1.875em;border:.25em solid transparent;border-radius:50%;line-height:5em;cursor:default;box-sizing:content-box;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;zoom:normal}.swal2-icon-text{font-size:3.75em}.swal2-icon.swal2-error{border-color:#f27474}.swal2-icon.swal2-error .swal2-x-mark{position:relative;flex-grow:1}.swal2-icon.swal2-error [class^=swal2-x-mark-line]{display:block;position:absolute;top:2.3125em;width:2.9375em;height:.3125em;border-radius:.125em;background-color:#f27474}.swal2-icon.swal2-error [class^=swal2-x-mark-line][class$=left]{left:1.0625em;-webkit-transform:rotate(45deg);transform:rotate(45deg)}.swal2-icon.swal2-error [class^=swal2-x-mark-line][class$=right]{right:1em;-webkit-transform:rotate(-45deg);transform:rotate(-45deg)}.swal2-icon.swal2-warning{border-color:#facea8;color:#f8bb86}.swal2-icon.swal2-info{border-color:#9de0f6;color:#3fc3ee}.swal2-icon.swal2-question{border-color:#c9dae1;color:#87adbd}.swal2-icon.swal2-success{border-color:#a5dc86}.swal2-icon.swal2-success [class^=swal2-success-circular-line]{position:absolute;width:3.75em;height:7.5em;-webkit-transform:rotate(45deg);transform:rotate(45deg);border-radius:50%}.swal2-icon.swal2-success [class^=swal2-success-circular-line][class$=left]{top:-.4375em;left:-2.0635em;-webkit-transform:rotate(-45deg);transform:rotate(-45deg);-webkit-transform-origin:3.75em 3.75em;transform-origin:3.75em 3.75em;border-radius:7.5em 0 0 7.5em}.swal2-icon.swal2-success [class^=swal2-success-circular-line][class$=right]{top:-.6875em;left:1.875em;-webkit-transform:rotate(-45deg);transform:rotate(-45deg);-webkit-transform-origin:0 3.75em;transform-origin:0 3.75em;border-radius:0 7.5em 7.5em 0}.swal2-icon.swal2-success .swal2-success-ring{position:absolute;top:-.25em;left:-.25em;width:100%;height:100%;border:.25em solid rgba(165,220,134,.3);border-radius:50%;z-index:2;box-sizing:content-box}.swal2-icon.swal2-success .swal2-success-fix{position:absolute;top:.5em;left:1.625em;width:.4375em;height:5.625em;-webkit-transform:rotate(-45deg);transform:rotate(-45deg);z-index:1}.swal2-icon.swal2-success [class^=swal2-success-line]{display:block;position:absolute;height:.3125em;border-radius:.125em;background-color:#a5dc86;z-index:2}.swal2-icon.swal2-success [class^=swal2-success-line][class$=tip]{top:2.875em;left:.875em;width:1.5625em;-webkit-transform:rotate(45deg);transform:rotate(45deg)}.swal2-icon.swal2-success [class^=swal2-success-line][class$=long]{top:2.375em;right:.5em;width:2.9375em;-webkit-transform:rotate(-45deg);transform:rotate(-45deg)}.swal2-progresssteps{align-items:center;margin:0 0 1.25em;padding:0;font-weight:600}.swal2-progresssteps li{display:inline-block;position:relative}.swal2-progresssteps .swal2-progresscircle{width:2em;height:2em;border-radius:2em;background:#3085d6;color:#fff;line-height:2em;text-align:center;z-index:20}.swal2-progresssteps .swal2-progresscircle:first-child{margin-left:0}.swal2-progresssteps .swal2-progresscircle:last-child{margin-right:0}.swal2-progresssteps .swal2-progresscircle.swal2-activeprogressstep{background:#3085d6}.swal2-progresssteps .swal2-progresscircle.swal2-activeprogressstep~.swal2-progresscircle{background:#add8e6}.swal2-progresssteps .swal2-progresscircle.swal2-activeprogressstep~.swal2-progressline{background:#add8e6}.swal2-progresssteps .swal2-progressline{width:2.5em;height:.4em;margin:0 -1px;background:#3085d6;z-index:10}[class^=swal2]{-webkit-tap-highlight-color:transparent}.swal2-show{-webkit-animation:swal2-show .3s;animation:swal2-show .3s}.swal2-show.swal2-noanimation{-webkit-animation:none;animation:none}.swal2-hide{-webkit-animation:swal2-hide .15s forwards;animation:swal2-hide .15s forwards}.swal2-hide.swal2-noanimation{-webkit-animation:none;animation:none}[dir=rtl] .swal2-close{right:auto;left:0}.swal2-animate-success-icon .swal2-success-line-tip{-webkit-animation:swal2-animate-success-line-tip .75s;animation:swal2-animate-success-line-tip .75s}.swal2-animate-success-icon .swal2-success-line-long{-webkit-animation:swal2-animate-success-line-long .75s;animation:swal2-animate-success-line-long .75s}.swal2-animate-success-icon .swal2-success-circular-line-right{-webkit-animation:swal2-rotate-success-circular-line 4.25s ease-in;animation:swal2-rotate-success-circular-line 4.25s ease-in}.swal2-animate-error-icon{-webkit-animation:swal2-animate-error-icon .5s;animation:swal2-animate-error-icon .5s}.swal2-animate-error-icon .swal2-x-mark{-webkit-animation:swal2-animate-error-x-mark .5s;animation:swal2-animate-error-x-mark .5s}@-webkit-keyframes swal2-rotate-loading{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}@keyframes swal2-rotate-loading{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}@media print{body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown){overflow-y:scroll!important}body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown)&gt;[aria-hidden=true]{display:none}body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown) .swal2-container{position:initial!important}}</style><style type="text/css"></style><style type="text/css">.jqstooltip { position: absolute;left: 0px;top: 0px;visibility: hidden;background: rgb(0, 0, 0) transparent;background-color: rgba(0,0,0,0.6);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";color: white;font: 10px arial, san serif;text-align: left;white-space: nowrap;padding: 5px;border: 1px solid white;z-index: 10000;}.jqsfield { color: white;font: 10px arial, san serif;text-align: left;}</style><script src="http://www.51nod.com/js/ace/theme-clouds.js"></script><script src="http://www.51nod.com/js/ace/mode-c_cpp.js"></script><script src="http://www.51nod.com/js/ace/snippets/text.js"></script><style id="ace-clouds">.ace-clouds .ace_gutter {background: #ebebeb;color: #333}.ace-clouds .ace_print-margin {width: 1px;background: #e8e8e8}.ace-clouds {background-color: #FFFFFF;color: #000000}.ace-clouds .ace_cursor {color: #000000}.ace-clouds .ace_marker-layer .ace_selection {background: #BDD5FC}.ace-clouds.ace_multiselect .ace_selection.ace_start {box-shadow: 0 0 3px 0px #FFFFFF;}.ace-clouds .ace_marker-layer .ace_step {background: rgb(255, 255, 0)}.ace-clouds .ace_marker-layer .ace_bracket {margin: -1px 0 0 -1px;border: 1px solid #BFBFBF}.ace-clouds .ace_marker-layer .ace_active-line {background: #FFFBD1}.ace-clouds .ace_gutter-active-line {background-color : #dcdcdc}.ace-clouds .ace_marker-layer .ace_selected-word {border: 1px solid #BDD5FC}.ace-clouds .ace_invisible {color: #BFBFBF}.ace-clouds .ace_keyword,.ace-clouds .ace_meta,.ace-clouds .ace_support.ace_constant.ace_property-value {color: #AF956F}.ace-clouds .ace_keyword.ace_operator {color: #484848}.ace-clouds .ace_keyword.ace_other.ace_unit {color: #96DC5F}.ace-clouds .ace_constant.ace_language {color: #39946A}.ace-clouds .ace_constant.ace_numeric {color: #46A609}.ace-clouds .ace_constant.ace_character.ace_entity {color: #BF78CC}.ace-clouds .ace_invalid {background-color: #FF002A}.ace-clouds .ace_fold {background-color: #AF956F;border-color: #000000}.ace-clouds .ace_storage,.ace-clouds .ace_support.ace_class,.ace-clouds .ace_support.ace_function,.ace-clouds .ace_support.ace_other,.ace-clouds .ace_support.ace_type {color: #C52727}.ace-clouds .ace_string {color: #5D90CD}.ace-clouds .ace_comment {color: #BCC8BA}.ace-clouds .ace_entity.ace_name.ace_tag,.ace-clouds .ace_entity.ace_other.ace_attribute-name {color: #606060}.ace-clouds .ace_indent-guide {background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAE0lEQVQImWP4////f4bLly//BwAmVgd1/w11/gAAAABJRU5ErkJggg==") right repeat-y}
+/*# sourceURL=ace/css/ace-clouds */</style><script src="http://www.51nod.com/js/ace/snippets/c_cpp.js"></script><style type="text/css">.MathJax_Hover_Frame {border-radius: .25em; -webkit-border-radius: .25em; -moz-border-radius: .25em; -khtml-border-radius: .25em; box-shadow: 0px 0px 15px #83A; -webkit-box-shadow: 0px 0px 15px #83A; -moz-box-shadow: 0px 0px 15px #83A; -khtml-box-shadow: 0px 0px 15px #83A; border: 1px solid #A6D ! important; display: inline-block; position: absolute}
+.MathJax_Menu_Button .MathJax_Hover_Arrow {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 4px; -webkit-border-radius: 4px; -moz-border-radius: 4px; -khtml-border-radius: 4px; font-family: 'Courier New',Courier; font-size: 9px; color: #F0F0F0}
+.MathJax_Menu_Button .MathJax_Hover_Arrow span {display: block; background-color: #AAA; border: 1px solid; border-radius: 3px; line-height: 0; padding: 4px}
+.MathJax_Hover_Arrow:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_Hover_Arrow:hover span {background-color: #CCC!important}
+</style><style type="text/css">#MathJax_About {position: fixed; left: 50%; width: auto; text-align: center; border: 3px outset; padding: 1em 2em; background-color: #DDDDDD; color: black; cursor: default; font-family: message-box; font-size: 120%; font-style: normal; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-border-radius: 15px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_About.MathJax_MousePost {outline: none}
+.MathJax_Menu {position: absolute; background-color: white; color: black; width: auto; padding: 5px 0px; border: 1px solid #CCCCCC; margin: 0; cursor: default; font: menu; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 5px; -webkit-border-radius: 5px; -moz-border-radius: 5px; -khtml-border-radius: 5px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_MenuItem {padding: 1px 2em; background: transparent}
+.MathJax_MenuArrow {position: absolute; right: .5em; padding-top: .25em; color: #666666; font-size: .75em}
+.MathJax_MenuActive .MathJax_MenuArrow {color: white}
+.MathJax_MenuArrow.RTL {left: .5em; right: auto}
+.MathJax_MenuCheck {position: absolute; left: .7em}
+.MathJax_MenuCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuRadioCheck {position: absolute; left: .7em}
+.MathJax_MenuRadioCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuLabel {padding: 1px 2em 3px 1.33em; font-style: italic}
+.MathJax_MenuRule {border-top: 1px solid #DDDDDD; margin: 4px 3px}
+.MathJax_MenuDisabled {color: GrayText}
+.MathJax_MenuActive {background-color: #606872; color: white}
+.MathJax_MenuDisabled:focus, .MathJax_MenuLabel:focus {background-color: #E8E8E8}
+.MathJax_ContextMenu:focus {outline: none}
+.MathJax_ContextMenu .MathJax_MenuItem:focus {outline: none}
+#MathJax_AboutClose {top: .2em; right: .2em}
+.MathJax_Menu .MathJax_MenuClose {top: -10px; left: -10px}
+.MathJax_MenuClose {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; font-family: 'Courier New',Courier; font-size: 24px; color: #F0F0F0}
+.MathJax_MenuClose span {display: block; background-color: #AAA; border: 1.5px solid; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; line-height: 0; padding: 8px 0 6px}
+.MathJax_MenuClose:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_MenuClose:hover span {background-color: #CCC!important}
+.MathJax_MenuClose:hover:focus {outline: none}
+</style><style type="text/css">.MathJax_Preview .MJXf-math {color: inherit!important}
+</style><style type="text/css">.MJX_Assistive_MathML {position: absolute!important; top: 0; left: 0; clip: rect(1px, 1px, 1px, 1px); padding: 1px 0 0 0!important; border: 0!important; height: 1px!important; width: 1px!important; overflow: hidden!important; display: block!important; -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none}
+.MJX_Assistive_MathML.MJX_Assistive_MathML_Block {width: 100%!important}
+</style><style type="text/css">#MathJax_Zoom {position: absolute; background-color: #F0F0F0; overflow: auto; display: block; z-index: 301; padding: .5em; border: 1px solid black; margin: 0; font-weight: normal; font-style: normal; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; -webkit-box-sizing: content-box; -moz-box-sizing: content-box; box-sizing: content-box; box-shadow: 5px 5px 15px #AAAAAA; -webkit-box-shadow: 5px 5px 15px #AAAAAA; -moz-box-shadow: 5px 5px 15px #AAAAAA; -khtml-box-shadow: 5px 5px 15px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_ZoomOverlay {position: absolute; left: 0; top: 0; z-index: 300; display: inline-block; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+#MathJax_ZoomFrame {position: relative; display: inline-block; height: 0; width: 0}
+#MathJax_ZoomEventTrap {position: absolute; left: 0; top: 0; z-index: 302; display: inline-block; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+</style><style type="text/css">.MathJax_Preview {color: #888}
+#MathJax_Message {position: fixed; left: 1em; bottom: 1.5em; background-color: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto; white-space: nowrap}
+#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-index: 101; border: 0px; margin: 0px; padding: 0px}
+.MathJax_Error {color: #CC0000; font-style: italic}
+</style><style type="text/css">.MJXp-script {font-size: .8em}
+.MJXp-right {-webkit-transform-origin: right; -moz-transform-origin: right; -ms-transform-origin: right; -o-transform-origin: right; transform-origin: right}
+.MJXp-bold {font-weight: bold}
+.MJXp-italic {font-style: italic}
+.MJXp-scr {font-family: MathJax_Script,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-frak {font-family: MathJax_Fraktur,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-sf {font-family: MathJax_SansSerif,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-cal {font-family: MathJax_Caligraphic,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-mono {font-family: MathJax_Typewriter,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-largeop {font-size: 150%}
+.MJXp-largeop.MJXp-int {vertical-align: -.2em}
+.MJXp-math {display: inline-block; line-height: 1.2; text-indent: 0; font-family: 'Times New Roman',Times,STIXGeneral,serif; white-space: nowrap; border-collapse: collapse}
+.MJXp-display {display: block; text-align: center; margin: 1em 0}
+.MJXp-math span {display: inline-block}
+.MJXp-box {display: block!important; text-align: center}
+.MJXp-box:after {content: " "}
+.MJXp-rule {display: block!important; margin-top: .1em}
+.MJXp-char {display: block!important}
+.MJXp-mo {margin: 0 .15em}
+.MJXp-mfrac {margin: 0 .125em; vertical-align: .25em}
+.MJXp-denom {display: inline-table!important; width: 100%}
+.MJXp-denom &gt; * {display: table-row!important}
+.MJXp-surd {vertical-align: top}
+.MJXp-surd &gt; * {display: block!important}
+.MJXp-script-box &gt; *  {display: table!important; height: 50%}
+.MJXp-script-box &gt; * &gt; * {display: table-cell!important; vertical-align: top}
+.MJXp-script-box &gt; *:last-child &gt; * {vertical-align: bottom}
+.MJXp-script-box &gt; * &gt; * &gt; * {display: block!important}
+.MJXp-mphantom {visibility: hidden}
+.MJXp-munderover, .MJXp-munder {display: inline-table!important}
+.MJXp-over {display: inline-block!important; text-align: center}
+.MJXp-over &gt; * {display: block!important}
+.MJXp-munderover &gt; *, .MJXp-munder &gt; * {display: table-row!important}
+.MJXp-mtable {vertical-align: .25em; margin: 0 .125em}
+.MJXp-mtable &gt; * {display: inline-table!important; vertical-align: middle}
+.MJXp-mtr {display: table-row!important}
+.MJXp-mtd {display: table-cell!important; text-align: center; padding: .5em 0 0 .5em}
+.MJXp-mtr &gt; .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mtr:first-child &gt; .MJXp-mtd {padding-top: 0}
+.MJXp-mlabeledtr {display: table-row!important}
+.MJXp-mlabeledtr &gt; .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mlabeledtr:first-child &gt; .MJXp-mtd {padding-top: 0}
+.MJXp-merror {background-color: #FFFF88; color: #CC0000; border: 1px solid #CC0000; padding: 1px 3px; font-style: normal; font-size: 90%}
+.MJXp-scale0 {-webkit-transform: scaleX(.0); -moz-transform: scaleX(.0); -ms-transform: scaleX(.0); -o-transform: scaleX(.0); transform: scaleX(.0)}
+.MJXp-scale1 {-webkit-transform: scaleX(.1); -moz-transform: scaleX(.1); -ms-transform: scaleX(.1); -o-transform: scaleX(.1); transform: scaleX(.1)}
+.MJXp-scale2 {-webkit-transform: scaleX(.2); -moz-transform: scaleX(.2); -ms-transform: scaleX(.2); -o-transform: scaleX(.2); transform: scaleX(.2)}
+.MJXp-scale3 {-webkit-transform: scaleX(.3); -moz-transform: scaleX(.3); -ms-transform: scaleX(.3); -o-transform: scaleX(.3); transform: scaleX(.3)}
+.MJXp-scale4 {-webkit-transform: scaleX(.4); -moz-transform: scaleX(.4); -ms-transform: scaleX(.4); -o-transform: scaleX(.4); transform: scaleX(.4)}
+.MJXp-scale5 {-webkit-transform: scaleX(.5); -moz-transform: scaleX(.5); -ms-transform: scaleX(.5); -o-transform: scaleX(.5); transform: scaleX(.5)}
+.MJXp-scale6 {-webkit-transform: scaleX(.6); -moz-transform: scaleX(.6); -ms-transform: scaleX(.6); -o-transform: scaleX(.6); transform: scaleX(.6)}
+.MJXp-scale7 {-webkit-transform: scaleX(.7); -moz-transform: scaleX(.7); -ms-transform: scaleX(.7); -o-transform: scaleX(.7); transform: scaleX(.7)}
+.MJXp-scale8 {-webkit-transform: scaleX(.8); -moz-transform: scaleX(.8); -ms-transform: scaleX(.8); -o-transform: scaleX(.8); transform: scaleX(.8)}
+.MJXp-scale9 {-webkit-transform: scaleX(.9); -moz-transform: scaleX(.9); -ms-transform: scaleX(.9); -o-transform: scaleX(.9); transform: scaleX(.9)}
+.MathJax_PHTML .noError {vertical-align: ; font-size: 90%; text-align: left; color: black; padding: 1px 3px; border: 1px solid}
+</style></head>
+
+  
+    <body class=" pace-done"><div id="MathJax_Message" style="display: none;"></div><div class="pace  pace-inactive"><div class="pace-progress" data-progress-text="100%" data-progress="99" style="transform: translate3d(100%, 0px, 0px);">
+  <div class="pace-progress-inner"></div>
+</div>
+<div class="pace-activity"></div></div>
+        <div id="wrapper">
+            <nav class="navbar-default navbar-static-side ng-hide" role="navigation" ng-show="CurrentUserId !== 0" style="">
+    <div class="sidebar-collapse">
+        <ul class="nav metismenu" id="side-menu">
+            <li class="nav-header">
+                <div class="dropdown profile-element">
+                    <div class="pull-left m-r-sm">
+                        <img alt="" title="" class="img-circle img-sm" ng-src="/images/default/male.jpg" src="/images/default/male.jpg" />
+                    </div>
+                    <a data-toggle="dropdown" class="dropdown-toggle">
+                        <span class="clear">
+                            <span class="block m-t-sm">
+                                <strong class="font-bold ng-binding">
+                                    <b class="caret" style="margin-left: 10px"></b>
+                                </strong>
+                            </span>
+                        </span>
+                    </a>
+                    <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                        <li><a ng-href="/User/Index.html" href="/User/Index.html">个人主页</a></li>
+                        <li><a ng-href="/Home/Payment.html" href="/Home/Payment.html">账户充值</a></li>
+                        <li><a ng-href="/Setting/MyResume.html" href="/Setting/MyResume.html">档案设置</a></li>
+                        <!-- ngIf: Permission.IsProblemEditor(CurrentUser.Permission) || Permission.IsLiveEditor(CurrentUser.Permission) || Permission.IsContestEditor(CurrentUser.Permission) -->
+                        <li ng-show="Permission.IsProblemEditor(CurrentUser.Permission)" class="ng-hide"><a ng-href="//Management.51nod.com/Problem/UserProblemList.html" href="//Management.51nod.com/Problem/UserProblemList.html">我要出题</a></li>
+                        <li ng-show="Permission.IsLiveEditor(CurrentUser.Permission)" class="ng-hide"><a ng-href="/Live/LiveEdit.html" href="/Live/LiveEdit.html">我要直播</a></li>
+                        <li ng-show="Permission.IsContestEditor(CurrentUser.Permission)" class="ng-hide"><a ng-href="">创建比赛</a></li>
+                        <li class="divider"></li>
+                        <li><a ng-click="NodPost.User.LoginOut();">退出登录</a></li>
+                    </ul>
+                </div>
+                <div class="logo-element">
+                    <i class="fa fa-user"></i>
+                </div>
+            </li>
+            <li>
+                <a><i class="fa fa-question"></i><span class="nav-label" style="margin-left: 13px;">问答</span><i class="fa arrow"></i></a>
+                <ul class="nav nav-second-level collapse">
+                    <li><a ng-href="/Question/UserQuestionList.html" href="/Question/UserQuestionList.html">我的提问</a></li>
+                    <li><a ng-href="/Answer/UserAnswerList.html" href="/Answer/UserAnswerList.html">我的回答</a></li>
+                    <li><a ng-href="/Question/UserFocusQuestionList.html" href="/Question/UserFocusQuestionList.html">关注的问题</a></li>
+                </ul>
+            </li>
+            <li>
+                <a><i class="fa fa-code"></i><span class="nav-label" style="margin-left: 7px;">编程挑战</span><i class="fa arrow"></i></a>
+                <ul class="nav nav-second-level collapse">
+                    <li><a ng-href="/Challenge/UserIndex.html" href="/Challenge/UserIndex.html">个人主页</a></li>
+                    <li><a ng-href="/Challenge/UserSubmitList.html" href="/Challenge/UserSubmitList.html">我的提交</a></li>
+                    <li><a ng-href="/Challenge/UserFocusProblemList.html" href="/Challenge/UserFocusProblemList.html">我关注的题目</a></li>
+                    <!-- ngIf: Permission.IsProblemEditor(CurrentUser.Permission) -->
+                </ul>
+            </li>
+            <li>
+                <a>
+                    <i class="fa fa-clock"></i>
+                    <span class="nav-label" style="margin-left: 10px;">编程竞赛</span>
+                    <i class="fa arrow"></i>
+                </a>
+                <ul class="nav nav-second-level collapse">
+                    <li><a ng-href="/Contest/UserIndex.html" href="/Contest/UserIndex.html">个人主页</a></li>
+                    <li><a ng-href="/Contest/UserContestList.html" href="/Contest/UserContestList.html">注册的比赛</a></li>
+                    <li><a ng-href="/Contest/UserSubmitList.html" href="/Contest/UserSubmitList.html">我的竞赛提交</a></li>
+                </ul>
+            </li>
+            <li>
+                <a>
+                    <i class="fab fa-leanpub"></i>
+                    <span class="nav-label" style="margin-left: 6px;">学习</span>
+                    <i class="fa arrow"></i>
+                </a>
+                <ul class="nav nav-second-level collapse">
+                    <li><a ng-href="/Blog/UserBlogList.html" href="/Blog/UserBlogList.html">我的博客</a></li>
+                    <li><a ng-href="/Live/UserLiveList.html" href="/Live/UserLiveList.html">我的直播</a></li>
+                    <li><a ng-href="/Live/UserRegLiveList.html" href="/Live/UserRegLiveList.html">看过的直播</a></li>
+                    <li><a ng-href="/Tutorial/UserTutorialList.html" href="/Tutorial/UserTutorialList.html">参加的教程</a></li>
+                    <li ng-show="Permission.IsLiveEditor(CurrentUser.Permission)" class="ng-hide"><a ng-href="/Live/LiveEdit.html" href="/Live/LiveEdit.html">我要直播</a></li>
+                </ul>
+            </li>
+            <li>
+                <a ng-href="/Favorite/UserFavoriteList.html" href="/Favorite/UserFavoriteList.html">
+                    <i class="fa fa-star"></i><span class="nav-label" style="margin-left: 9px;">我的收藏</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+            <div id="page-wrapper" class="white-bg" style="min-height: 596px;">
+                <div class="row border-bottom">
+    <nav id="TopBar" class="navbar navbar-fixed-top gray-bg topbar" role="navigation">
+        <div class="navbar-header">
+            <button class="navbar-minimalize minimalize-styl-2 btn btn-primary">
+                <i class="fa fa-bars"></i>
+            </button>
+            <div role="search" class="navbar-form-custom">
+                <div class="form-group" style="width:100px">
+                    <!-- ngIf: IsDataReady --><input id="mySearch" type="text" placeholder="搜一搜..." class="form-control ng-scope" ng-if="IsDataReady" ng-init="Tools.InitSearch();" autocomplete="off" /><!-- end ngIf: IsDataReady -->
+                </div>
+            </div>
+        </div>
+        <ul class="nav navbar-top-links navbar-right" style="margin-right: 10px">
+            <li ng-show="CurrentUserId !== 0" class="ng-hide">
+                <a class="count-info" ng-href="/Focus.html" title="首页" href="/Focus.html">
+                    <i class="fa fa-th tools-item"></i>
+                    <span class="tools-item" style="font-weight: 200">首页</span>
+                    <!-- ngIf: UserRealTime.LogNew != 0 && UserRealTime.LogNew < 100 -->
+                    <!-- ngIf: UserRealTime.LogNew >= 100 -->
+                </a>
+            </li>
+            <li>
+                <a class="count-info" ng-href="/Question/QuestionList.html" title="问答" href="/Question/QuestionList.html">
+                    <i class="fa fa-question tools-item"></i>
+                    <span class="tools-item" style="font-weight: 200">问答</span>
+                    <!-- ngIf: UserRealTime.QuestionNew != 0 && UserRealTime.QuestionNew < 100 -->
+                    <!-- ngIf: UserRealTime.QuestionNew >= 100 -->
+                </a>
+            </li>
+            <li>
+                <a class="dropdown-toggle count-info" data-toggle="dropdown" title="编程竞赛">
+                    <i class="far fa-clock tools-item"></i>
+                    <span class="tools-item" style="font-weight: 200">竞赛</span>
+                    <!-- ngIf: UserRealTime.ContestNew != 0 && UserRealTime.ContestNew < 100 -->
+                    <!-- ngIf: UserRealTime.ContestNew >= 100 -->
+                </a>
+                <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                    <li>
+                        <a ng-href="/Contest/ContestList.html" href="/Contest/ContestList.html">编程竞赛
+                            <!-- ngIf: UserRealTime.ContestNew != 0 && UserRealTime.ContestNew < 100 -->
+                            <!-- ngIf: UserRealTime.ContestNew >= 100 -->
+                        </a>
+                    </li>
+                    <li class="divider ng-hide" ng-show="CurrentUserId !== 0"></li>
+                    <li ng-show="CurrentUserId !== 0" class="ng-hide"><a ng-href="/Contest/UserIndex.html" href="/Contest/UserIndex.html">个人主页</a></li>
+                    <li ng-show="CurrentUserId !== 0" class="ng-hide"><a ng-href="/Contest/UserSubmitList.html" href="/Contest/UserSubmitList.html">我的提交记录</a></li>
+                    <li ng-show="CurrentUserId !== 0" class="ng-hide"><a ng-href="/Contest/UserContestList.html" href="/Contest/UserContestList.html">我注册的比赛</a></li>
+                    <li class="divider"></li>
+                    <li><a ng-href="/Contest/TotalRankList.html" href="/Contest/TotalRankList.html">排行榜</a></li>
+                </ul>
+            </li>
+            <li>
+                <a class="dropdown-toggle count-info" data-toggle="dropdown" title="编程挑战">
+                    <i class="fa fa-code tools-item"></i>
+                    <span class="tools-item" style="font-weight: 200">做题</span>
+                    <!-- ngIf: UserRealTime.ProblemNew != 0 && UserRealTime.ProblemNew < 100 -->
+                    <!-- ngIf: UserRealTime.ProblemNew >= 100 -->
+                </a>
+                <ul class="dropdown-menu animated fadeInRight m-t-xs">                    
+                    <li ng-show="CurrentUserId !== 0" class="ng-hide"><a ng-href="/Challenge/UserIndex.html" href="/Challenge/UserIndex.html">编程挑战主页</a></li>
+                    <li>
+                        <a ng-href="/Challenge/ProblemList.html" href="/Challenge/ProblemList.html">题目列表
+                            <!-- ngIf: UserRealTime.ProblemNew != 0 && UserRealTime.ProblemNew < 100 -->
+                            <!-- ngIf: UserRealTime.ProblemNew >= 100 -->
+                        </a>
+                    </li>
+                    <li><a ng-href="/Challenge/BeginnerProblemList.html" href="/Challenge/BeginnerProblemList.html">初学者练习</a></li>
+                    <li><a ng-href="/Challenge/TotalSubmitList.html" href="/Challenge/TotalSubmitList.html">提交状态</a></li>
+                    <li class="divider ng-hide" ng-show="CurrentUserId !== 0"></li>
+                    <li ng-show="CurrentUserId !== 0" class="ng-hide"><a ng-href="/Challenge/UserSubmitList.html" href="/Challenge/UserSubmitList.html">我的提交记录</a></li>
+                    <li ng-show="CurrentUserId !== 0" class="ng-hide"><a ng-href="/Challenge/UserFocusProblemList.html" href="/Challenge/UserFocusProblemList.html">我关注的题目</a></li>
+                    <li ng-show="Permission.IsProblemEditor(CurrentUser.Permission)" class="ng-hide"><a ng-href="//Management.51nod.com/Problem/UserProblemList.html" href="//Management.51nod.com/Problem/UserProblemList.html">我要出题</a></li>
+                    <li class="divider"></li>
+                    <li><a ng-href="/Challenge/TotalRankList.html" href="/Challenge/TotalRankList.html">排行榜</a></li>
+                </ul>
+            </li>
+            <li>
+                <a class="dropdown-toggle count-info" data-toggle="dropdown" title="学习">
+                    <i class="fab fa-leanpub tools-item"></i>
+                    <span class="tools-item" style="font-weight: 200">学习</span>
+                    <!-- ngIf: UserRealTime.TutorialNew + UserRealTime.LiveNew != 0 && UserRealTime.TutorialNew + UserRealTime.LiveNew < 100 -->
+                    <!-- ngIf: UserRealTime.TutorialNew + UserRealTime.LiveNew >= 100 -->
+                </a>
+                <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                    <li>
+                        <a ng-href="/Live/LiveList.html" href="/Live/LiveList.html">直播列表
+                            <!-- ngIf: UserRealTime.LiveNew != 0 --><span class="badge m-l-sm label label-warning ng-binding ng-scope" ng-if="UserRealTime.LiveNew != 0">
+                            </span><!-- end ngIf: UserRealTime.LiveNew != 0 -->
+                        </a>
+                    </li>
+                    <li ng-show="CurrentUserId !== 0" class="ng-hide">
+                        <a ng-href="/Live/UserLiveList.html" href="/Live/UserLiveList.html">我的直播</a>
+                    </li>
+                    <li ng-show="CurrentUserId !== 0" class="ng-hide">
+                        <a ng-href="/Live/UserRegLiveList.html" href="/Live/UserRegLiveList.html">看过的直播</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a ng-href="/Blog/BlogList.html" href="/Blog/BlogList.html">博客列表</a>
+                    </li>
+                    <li ng-show="CurrentUserId !== 0" class="ng-hide">
+                        <a ng-href="/Blog/UserBlogList.html" href="/Blog/UserBlogList.html">我的博客</a>
+                    </li>
+                    <li ng-show="CurrentUserId !== 0" class="ng-hide">
+                        <a ng-href="/Blog/BlogEdit.html" href="/Blog/BlogEdit.html">写博客</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a ng-href="/Tutorial/TutorialList.html" href="/Tutorial/TutorialList.html">自助教程       
+                            <!-- ngIf: UserRealTime.TutorialNew != 0 --><span class="badge m-l-sm label label-warning ng-binding ng-scope" ng-if="UserRealTime.TutorialNew != 0">
+                            </span><!-- end ngIf: UserRealTime.TutorialNew != 0 -->
+                        </a>
+                    </li>
+                    <li ng-show="CurrentUserId !== 0" class="ng-hide">
+                        <a ng-href="/Tutorial/UserTutorialList.html" href="/Tutorial/UserTutorialList.html">我参加的教程</a>
+                    </li>
+                </ul>
+            </li>
+            <li ng-show="CurrentUserId !== 0" class="ng-hide">
+                <a class="dropdown-toggle count-info" data-toggle="dropdown" title="通知及私信">
+                    <i class="far fa-bell tools-item"></i>
+                    <span class="tools-item" style="font-weight: 200">通知</span>
+                    <!-- ngIf: UserRealTime.MessageNew + UserRealTime.SysNoticeNew + UserRealTime.NoticeNew + UserRealTime.MentionNew != 0 && UserRealTime.MessageNew + UserRealTime.SysNoticeNew + UserRealTime.NoticeNew + UserRealTime.MentionNew < 100 -->
+                    <!-- ngIf: UserRealTime.MessageNew + UserRealTime.SysNoticeNew + UserRealTime.NoticeNew + UserRealTime.MentionNew >= 100 -->
+                </a>
+                <ul class="dropdown-menu dropdown-alerts">
+                    <li>
+                        <a ng-href="/Home/Message.html" href="/Home/Message.html">
+                            <div class="ng-binding">
+                                <i class="fa fa-envelope"></i>
+                                你有  条新私信
+                            </div>
+                        </a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a ng-href="/Home/NoticeList.html#isSystem=true" href="/Home/NoticeList.html#isSystem=true">
+                            <div class="ng-binding">
+                                <i class="fas fa-cog"></i>
+                                你有  条新系统提醒 
+                            </div>
+                        </a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a ng-href="/Home/NoticeList.html#isSystem=false" href="/Home/NoticeList.html#isSystem=false">
+                            <div class="ng-binding">
+                                <i class="far fa-comment-alt"></i>
+                                你有  条新提醒
+                            </div>
+                        </a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a ng-href="/Home/MentionList.html" href="/Home/MentionList.html">
+                            <div class="ng-binding">
+                                <i class="fa fa-at"></i>
+                                最新@我  次
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li ng-show="CurrentUserId === 0" class="">
+                <a data-toggle="modal" data-target="#UserLogin" title="用户登录">
+                    <i class="fas fa-sign-in-alt tools-item"></i>
+                    <span class="tools-item" style="font-weight: 200">登录</span>
+                </a>
+            </li>
+            <li ng-show="CurrentUserId === 0" class="">
+                <a data-toggle="modal" data-target="#UserRegister" title="注册51nod">
+                    <i class="fas fa-user-plus tools-item"></i>
+                    <span class="tools-item" style="font-weight: 200">注册</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+<!-- Model: Login -->
+<div class="modal inmodal fade" id="UserLogin" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">关闭窗口</span></button>
+                <h4 class="modal-title">
+                    <span class="g-mr-20">登录</span>
+                </h4>
+            </div>
+            <div class="modal-body" onkeyup="Tools.KeyHook(13, 'ModalLoginButton')">
+                <form class="g-mb-10 ng-pristine ng-invalid ng-invalid-required" role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required" placeholder="请输入登录邮箱或手机号" ng-model="UserLoginName" required="required" />
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required" placeholder="请输入密码" ng-model="UserLoginPassword" required="required" />
+                    </div>
+                    <div class="form-group text-left">
+                        <div class="checkbox i-checks">
+                            <label class="g-pl-0">
+                                <div class="icheckbox_square-green checked" style="position: relative;"><input type="checkbox" class="m-r-xs ng-pristine ng-untouched ng-valid ng-not-empty" ng-init="UserLoginIsPersistent=true;" ng-model="UserLoginIsPersistent" ng-icheck="" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;" /><ins class="iCheck-helper" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0; cursor: pointer;"></ins></div>
+                                <span class="m-l-xs">记住我</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <button type="button" class="btn btn-white" data-toggle="modal" data-target="#UserRegister" data-dismiss="modal">我要注册</button>
+                        <button type="button" class="btn btn-white" data-toggle="modal" data-target="#UserForgotPassword" data-dismiss="modal">找回密码</button>
+                        <button id="ModalLoginButton" type="button" class="btn btn-info" ng-click="NodPost.User.Login(UserLoginName, UserLoginPassword, UserLoginIsPersistent)">登录</button>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                第三方登录 
+                <script>
+    Tools.ThirdLoginHref = function () {
+        if (window.location.pathname === '/Login.html') {
+            if (window.location.search.length !== 0) {
+                var search = window.location.search.substring(1);
+                if (search.split('=')[0] === 'oldhref')
+                    Tools.SetCookie('ThirdLoginHref', decodeURIComponent(search.split('=')[1]).substring(window.location.origin.length), 1 / 24 / 6);
+            }
+        }
+        else {
+            var oldhref = window.location.pathname + window.location.search + window.location.hash.substring(window.location.hash.lastIndexOf('#'));
+            Tools.SetCookie('ThirdLoginHref', oldhref, 1 / 24 / 6);
+        }
+    }
+</script>
+<a ng-click="Tools.QQLogin();"><i class="fab fa-qq g-cursor-pointer" aria-hidden="true"></i></a>
+
+<script>
+    Tools.QQLogin = function () {
+        Tools.ThirdLoginHref();
+        var state = Tools.Random().toString();
+        var clientId = '100306089';
+        Tools.SetCookie('QQLoginState', state, 1);
+        window.location.href = 'https://graph.qq.com/oauth2.0/authorize?response_type=' + encodeURIComponent('code')
+            + '&amp;client_id=' + encodeURIComponent(clientId)
+            + '&amp;state=' + encodeURIComponent(state)
+            + '&amp;redirect_uri=' + encodeURIComponent('https://www.51nod.com/CallBack/QQLogin');
+    }
+</script>
+
+<a ng-click="Tools.WeiXinLogin();"><i class="fab fa-weixin g-cursor-pointer" aria-hidden="true"></i></a>
+
+<script>
+    Tools.WeiXinLogin = function () {
+        Tools.ThirdLoginHref();
+        var state = Tools.Random().toString();
+        var clientId = 'wx25b79a980f6baec3';
+        Tools.SetCookie('WXLoginState', state, 1);
+        window.location.href = 'https://open.weixin.qq.com/connect/qrconnect?appid=' + encodeURIComponent(clientId)
+            + '&amp;redirect_uri=' + encodeURIComponent('https://www.51nod.com/CallBack/WXLogin')
+            + '&amp;response_type=' + encodeURIComponent('code')
+            + '&amp;scope=' + encodeURIComponent('snsapi_login')
+            + '&amp;state=' + encodeURIComponent(state);
+    }
+</script>
+
+<a ng-click="Tools.WeiBoLogin();"><i class="fab fa-weibo g-cursor-pointer" aria-hidden="true"></i></a>
+
+<script>
+    Tools.WeiBoLogin = function () {
+        Tools.ThirdLoginHref();
+        var clientId = '3138594281';
+        window.location.href = 'https://api.weibo.com/oauth2/authorize?client_id=' + encodeURIComponent(clientId)
+            + '&amp;response_type=' + encodeURIComponent('code')
+            + '&amp;redirect_uri=' + encodeURIComponent('https://www.51nod.com/login/weibo');
+    }
+</script>
+
+
+                为避免频繁登录，你可在登录后通过个人设置转为本地账号
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Model: Login -->
+
+<!-- Model: UserRegister -->
+<div class="modal inmodal fade" id="UserRegister" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">×</span>
+                    <span class="sr-only">关闭窗口</span>
+                </button>
+                <h4 class="modal-title"><span class="g-mr-20">注册</span></h4>
+            </div>
+            <div class="modal-body" onkeyup="Tools.KeyHook(13, 'ModalRegisterButton')">
+                <form class="g-mb-10 ng-pristine ng-invalid ng-invalid-required" role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required" placeholder="请输入姓名" required="" ng-model="UserRegisterName" />
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required" placeholder="请输入邮箱" required="" ng-model="UserRegisterEmail" />
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required" placeholder="请输入密码" required="" ng-model="UserRegisterPassword" />
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-6"><input type="text" class="form-control ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required" placeholder="请输入验证码" required="" ng-model="UserRegisterLoginToken" /></div>
+                        <div class="col-sm-6 text-left"><img class="m-t-xs" ng-init="RegisterLoginTokenRandom=1;" style="cursor:pointer" ng-src="/UserWriter/UserRegisterCaptcha?random=1" ng-click="RegisterLoginTokenRandom=RegisterLoginTokenRandom+1;" alt="点击刷新" title="点击刷新" src="/UserWriter/UserRegisterCaptcha?random=1" /></div>
+                    </div>
+                    <div class="text-right">
+                        <button type="button" class="btn btn-white" data-toggle="modal" data-target="#UserLogin" data-dismiss="modal">我要登录</button>
+                        <button type="button" class="btn btn-white" data-toggle="modal" data-target="#UserRegisterEmail" data-dismiss="modal">重发注册邮件</button>
+                        <button id="ModalRegisterButton" type="button" class="btn btn-info" ng-click="NodPost.User.UserRegister(UserRegisterName, UserRegisterEmail, UserRegisterPassword, UserRegisterLoginToken);">注册</button>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>
+<!-- End Model: UserRegister -->
+
+<!-- Model: UserRegisterEmail -->
+<div class="modal inmodal fade" id="UserRegisterEmail" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">×</span>
+                    <span class="sr-only">关闭窗口</span>
+                </button>
+                <h4 class="modal-title"><span class="g-mr-20">重发注册邮件</span></h4>
+            </div>
+            <div class="modal-body" onkeyup="Tools.KeyHook(13, 'ModalRegisterEmailButton')">
+                <form class="g-mb-10 ng-pristine ng-invalid ng-invalid-required" role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required" placeholder="请输入邮箱" required="required" ng-model="UserRegisterEmailNew" />
+                    </div>
+                    <div class="text-right">
+                        <button type="button" class="btn btn-white" data-toggle="modal" data-target="#UserLogin" data-dismiss="modal">我要登录</button>
+                        <button type="button" class="btn btn-white" data-toggle="modal" data-target="#UserRegister" data-dismiss="modal">我要注册</button>
+                        <button id="ModalRegisterEmailButton" type="button" class="btn btn-info" ng-click="NodPost.User.UserRegisterEmail(UserRegisterEmailNew)">重发注册邮件</button>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>
+<!-- End Model: UserRegisterEmail -->
+
+<!-- Model: UserForgotPassword -->
+<div class="modal inmodal fade" id="UserForgotPassword" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">×</span>
+                    <span class="sr-only">关闭窗口</span>
+                </button>
+                <h4 class="modal-title"><span class="g-mr-20">找回密码</span></h4>
+            </div>
+            <div class="modal-body" onkeyup="Tools.KeyHook(13, 'ModalForgotPasswordButton')">
+                <form class="g-mb-10 ng-pristine ng-invalid ng-invalid-required" role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required" placeholder="请输入邮箱" ng-model="ForgotPasswordEmail" required="required" />
+                    </div>
+                    <div class="text-right">
+                        <button type="button" class="btn btn-white" data-toggle="modal" data-target="#UserLogin" data-dismiss="modal">我要登录</button>
+                        <button type="button" class="btn btn-white" data-toggle="modal" data-target="#UserRegister" data-dismiss="modal">我要注册</button>
+                        <button id="ModalForgotPasswordButton" type="button" class="btn btn-info" ng-click="Tools.SweetAlertConfirm(NodPost.User.RetrieveUserPassWord, ForgotPasswordEmail, '重置密码', '确定重置密码？');">找回密码</button>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>
+<!-- End Model: UserForgotPassword -->
+
+
+                <div id="main-content" class="row p-t-60">
+                    <div class="col-lg-12">
+                        <div class="wrapper wrapper-content clear">
+                            <div class="col-lg-9">
+                                <div id="vertical-timeline" class="vertical-container light-timeline no-margins">
+                                    <div class="vertical-timeline-block">
+                                        <div class="vertical-timeline-icon navy-bg">
+                                            <i class="fa fa-briefcase"></i>
+                                        </div>
+                                        <div class="vertical-timeline-content">
+                                            <!-- ProblemMenu -->
+<div class="btn-group pull-right" ng-init="DisplayTopic=Tools.GetCookie('DisplayTopic');">
+    <button class="btn btn-xs btn-white ng-hide" type="button" data-toggle="modal" data-target="#Favorite" ng-show="CurrentUserId !== 0" ng-click="ScopePool.FavoriteScope.getFavoriteItem(ProblemView, 'Problem');">
+        <i class="fa fa-star"></i> 收藏
+    </button>
+    <!-- ngIf: !ProblemView.UserView.IsFocus && CurrentUserId > 0 -->
+    <!-- ngIf: ProblemView.UserView.IsFocus -->
+    <button class="btn btn-xs btn-info" type="button" ng-click="DisplayTopic=true;Tools.SetCookie('DisplayTopic', DisplayTopic, 365);" ng-show="!DisplayTopic">
+        <i class="fa fa-thumbs-up"></i> 显示话题
+    </button>
+    <button class="btn btn-xs btn-white ng-hide" type="button" ng-click="DisplayTopic=false;Tools.SetCookie('DisplayTopic', DisplayTopic, 365);" ng-show="DisplayTopic">
+        <i class="fa fa-thumbs-up"></i> 隐藏话题
+    </button>
+    <!-- ngIf: ProblemView.Topics !== undefined && CurrentUserId > 0 -->
+    <!-- ngIf: ProblemView.Topics === undefined && CurrentUserId > 0 -->
+</div>
+<!-- End ProblemMenu -->
+<!-- Model: TopicEdit -->
+<div class="modal inmodal fade" id="TopicEdit" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">关闭窗口</span></button>
+                <h4 class="modal-title">修改话题</h4>
+            </div>
+            <div class="modal-body">
+                <p>选择话题</p>
+                <!-- ngIf: IsDataReady --><select id="mySelect" class="form-control ng-scope select2-hidden-accessible" multiple="" ng-if="IsDataReady" ng-init="Tools.InitSearchTopic(ProblemView.Topics)" tabindex="-1" aria-hidden="true">
+                </select><span class="select2 select2-container select2-container--default" dir="ltr" style="width: 100%;"><span class="selection"><span class="select2-selection select2-selection--multiple" role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0"><ul class="select2-selection__rendered"><li class="select2-search select2-search--inline"><input class="select2-search__field" type="search" tabindex="-1" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" role="textbox" placeholder="搜索话题" style="width: 100px;" /></li></ul></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span><!-- end ngIf: IsDataReady -->
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="NodPost.Topic.Rework(ProblemView, 'Problem')">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Model: TopicEdit -->
+<!-- Select2 -->
+<style>
+    .select2-dropdown {
+        z-index: 10000 !important; /*1051;*/
+    }
+    .select2-search__field{
+        min-width:1px !important;
+    }
+</style>
+<script src="/js/plugins/select2/select2.full.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="/js/plugins/select2/zh-CN.js" type="text/javascript" charset="utf-8"></script>
+
+
+
+<div ng-show="DisplayTopic === undefined || DisplayTopic" class="ng-hide">
+    <!-- ngRepeat: Topic in ProblemView.Topics -->
+</div>
+<a ng-href="/Challenge/Problem.html#problemId=1663" href="/Challenge/Problem.html#problemId=1663"><h1 class="g-color-gray-dark-v3 ng-binding">1663 01游戏</h1></a>
+<ol class="breadcrumb">
+    <li>
+        <i class="fa fa-clock m-r-xs"></i><span class="ng-binding">1 秒</span>
+    </li>
+    <li class="ng-binding">131,072 KB</li>
+    <li class="ng-binding">80 分</li>
+    <!-- ngIf: ProblemView.Problem.Level === 1 -->
+    <!-- ngIf: ProblemView.Problem.Level < 11 && ProblemView.Problem.Level > 1 --><li ng-if="ProblemView.Problem.Level &lt; 11 &amp;&amp; ProblemView.Problem.Level &gt; 1" class="ng-scope"><a ng-href="/Challenge/ProblemList.html#level=6" class="ng-binding" href="/Challenge/ProblemList.html#level=6">5 级题</a></li><!-- end ngIf: ProblemView.Problem.Level < 11 && ProblemView.Problem.Level > 1 -->
+    <!-- ngIf: ProblemView.Problem.Level === 11 -->
+</ol>
+                                        </div>
+                                    </div>
+                                    <div class="vertical-timeline-block">
+                                        <div class="vertical-timeline-icon blue-bg">
+                                            <i class="fas fa-file-alt"></i>
+                                        </div>
+                                        <div class="vertical-timeline-content">
+                                                                                        <div ng-init="LaTexId = Tools.Random(); FullText = true;">
+    <div ng-bind-html="ProblemView.Problem.Description | filterFullText" class="m-t-sm h4 lh125 line4 ng-binding ng-hide" ng-show="!FullText">比得和华沙很喜欢玩“01游戏”。    在游戏一开始时，桌面上有一些卡牌，并从左到右一字排开。每张牌上只写有一个数字0或者1。他们轮流拿牌，华沙第一个拿。每次拿牌时，玩家只可以拿掉一张牌，然后把剩下的牌合并，使得中间没有空隙。假设拿牌前的情况是01010101，如果我们拿掉第四张牌（卡牌的编号从1开始），剩下的牌将是：0100101    当桌面上的牌只有两张的时候，游戏结束。卡牌的数字是一个数的二进制表示。最高位是最左边的一位。在游戏中，华沙想使得这个数最小，而比得想要最大。        很可惜，在游戏开始前发生了意外。小孩在玩耍时，不小心把果汁洒在了某些卡牌上，使得上面的数字无法辨认。每张损坏的卡牌，可以当作0或者1来使用。我们对未知数字的所有情况进行考虑。假设比得和华沙的策略都是最好的，对于每种情况，找出最后剩余的牌，我们称之为“结果”。找出所有可能的“结果”作为一个集合（集合中元素不可以重复）。样例解释：在样例中，初始数字一共有16种，对于0000，“结果”是00，1111“结果”是11，0011“结果”是01，1100“结果”是10。因为“结果”最多四种可能，其它情况可以不用考虑。</div>
+    <div id="LaTex793750683" ng-bind-html="ProblemView.Problem.Description | filterLaTex" class="m-t-sm h4 lh125 ng-binding" ng-show="FullText"><p>比得和华沙很喜欢玩“<span>01</span>游戏”。<span></span></p><p><span>    </span>在游戏一开始时，桌面上有一些卡牌，并从左到右一字排开。每张牌上只写有一个数字<span>0</span>或者<span>1。</span>他们轮流拿牌，华沙第一个拿。每次拿牌时，玩家只可以拿掉一张牌，然后把剩下的牌合并，使得中间没有空隙。假设拿牌前的情况是<span>01010101</span>，如果我们拿掉第四张牌（卡牌的编号从<span>1</span>开始），剩下的牌将是：<span>0100101</span></p><p><span>    </span>当桌面上的牌只有两张的时候，游戏结束。卡牌的数字是一个数的二进制表示。最高位是最左边的一位。在游戏中，华沙想使得这个数最小，而比得想要最大。<span></span></p><p><span>    </span></p><p><span>    </span>很可惜，在游戏开始前发生了意外。小孩在玩耍时，不小心把果汁洒在了某些卡牌上，使得上面的数字无法辨认。每张损坏的卡牌，可以当作<span>0</span>或者<span>1</span>来使用。我们对未知数字的所有情况进行考虑。假设比得和华沙的策略都是最好的，对于每种情况，找出最后剩余的牌，我们称之为“结果”。找出所有可能的“结果”作为一个集合（集合中元素不可以重复）。<span></span></p><br /><p>样例解释：</p><p><span><span>在样例中，初始数字一共有</span></span><span><span>16</span></span><span><span>种，对于</span></span><span><span>0000</span></span><span><span>，“结果”是</span></span><span><span>00</span></span><span><span>，</span></span><span><span>1111</span></span><span><span>“结果”是</span></span><span><span>11</span></span><span><span>，</span></span><span><span>0011</span></span><span><span>“结果”是</span></span><span><span>01</span></span><span><span>，</span></span><span><span>1100</span></span><span><span>“结果”是</span></span><span><span>10</span></span><span><span>。因为“结果”最多四种可能，其它情况可以不用考虑。</span></span><span><span></span></span></p><br /></div>
+    <button ng-show="FullText" class="btn btn-xs btn-white m-t-sm" ng-click="FullText = false;">
+        <i class="fas fa-level-up-alt"></i> 收起
+    </button>
+    <button ng-show="!FullText" class="btn btn-xs btn-white m-t-sm ng-hide" ng-click="FullText = true;">
+        <i class="fas fa-level-down-alt"></i> 展开全文
+    </button>
+    <!-- ngIf: IsDataReady --><span ng-if="IsDataReady" ng-init="Tools.ToLaTex('LaTex' + LaTexId);" class="ng-scope"></span><!-- end ngIf: IsDataReady -->
+</div>
+
+
+                                        </div>
+                                    </div>
+                                    <div class="vertical-timeline-block">
+                                        <div class="vertical-timeline-icon lazur-bg">
+                                            <i class="fas fa-keyboard"></i>
+                                        </div>
+                                        <div class="vertical-timeline-content">
+    <h1>输入</h1>
+    <pre style="font-size: medium; word-wrap: break-word; white-space: pre-wrap;" class="ng-binding">单组测试数据。
+共一行字符串S（2≤|S|≤10^5），由字符“0”，“1”或“?”组成表示初始的卡牌。在桌面上从左到右一字排开。“?”表示损坏的卡牌。</pre>
+</div>
+<div class="vertical-timeline-content">
+    <h1>输出</h1>
+    <pre style="font-size: medium; word-wrap: break-word; white-space: pre-wrap;" class="ng-binding">输出所有可能的“结果”。每个“结果”一行。每个“结果”两个数字，表示在桌面从左到右的数字。按字典序升序。</pre>
+</div>
+<div class="vertical-timeline-content">
+    <h1>输入样例</h1>
+    <pre class="ng-binding"><!-- ngIf: IsDataReady --><i id="InputSampleCopy" ng-if="IsDataReady" ng-init="Tools.InitClipBoardBtn('InputSampleCopy', '复制输入样例', ProblemView.Problem.InputSample);" class="fas fa-copy text-success ng-scope" title="复制内容" style="position: absolute;right: 2em; cursor:pointer; font-size: 1.2em;" data-clipboard-action="copy" data-clipboard-text="????"></i><!-- end ngIf: IsDataReady -->????</pre>
+</div>
+<div class="vertical-timeline-content">
+    <h1>输出样例</h1>
+    <pre class="ng-binding">00
+01
+10
+11</pre>
+</div>
+<!-- Toastr -->
+<script src="/js/plugins/clipboard/clipboard.min.js"></script>
+
+<script>
+    Tools.InitClipBoardBtn = function (btnId, title, target) {
+        var clipBoardBtn = new ClipboardJS('#' + btnId);
+        clipBoardBtn.on('success', function (e) {
+            Tools.ToastrSuccess(title, '复制成功！');
+        });
+        clipBoardBtn.on('error', function (e) {
+            Tools.ToastrError(title, '复制失败！');
+        });
+        $('#' + btnId).each(function () {
+            var $this = $(this);
+            $this.attr('data-clipboard-action', 'copy');
+            $this.attr('data-clipboard-text', target);
+        })
+    }
+</script>
+
+                                    </div>
+                                    <div class="vertical-timeline-block">
+                                        <div class="vertical-timeline-icon yellow-bg">
+                                            <i class="fa fa-user"></i>
+                                        </div>
+                                        <div class="vertical-timeline-content">
+                                            <div class="feed-element col-lg-4 no-margins">
+    <a ng-href="/User/Index.html#userId=3263" class="pull-left" href="/User/Index.html#userId=3263">
+        <img alt="System Message" title="System Message" class="img-circle" ng-src="//upload.51nod.com/upload/000FBF9C/08D30FABE0EF50B50000000000000013.png" src="//upload.51nod.com/upload/000FBF9C/08D30FABE0EF50B50000000000000013.png" />
+    </a>
+    <div class="media-body ">
+        <small class="pull-right badge badge-primary">出题人</small>
+        <strong class="ng-binding">System Message</strong><br />
+        <small class="text-muted ng-binding"></small>
+    </div>
+</div>
+<!-- ngIf: ProblemView.RealTestUser !== undefined -->
+
+                                        </div>
+                                    </div>
+                                    <div class="vertical-timeline-block ng-hide" ng-show="ProblemViews !== undefined">
+                                        <div class="vertical-timeline-icon red-bg">
+                                            <i class="fas fa-list-ul"></i>
+                                        </div>
+                                        <div class="vertical-timeline-content">
+                                            <!-- ngRepeat: ProblemView in ProblemViews -->
+
+                                        </div>                                        
+                                    </div>
+                                    <div class="vertical-timeline-block">
+                                        <div class="vertical-timeline-icon navy-bg">
+                                            <i class="fa fa-code"></i>
+                                        </div>
+                                        <div class="vertical-timeline-content">
+                                            <ol class="breadcrumb">
+    <li>
+        <div style="position: relative">
+    <a data-toggle="dropdown" class="dropdown-toggle ng-binding">C<b class="caret m-l-sm"></b></a>
+    <ul class="dropdown-menu animated fadeInRight" style="width:200px">
+        <!-- ngRepeat: LanguageItem in LanguageList | filterFirst | filterEven --><div ng-repeat="LanguageItem in LanguageList | filterFirst | filterEven" class="col-md-6 m-t-xs m-b-xs ng-scope"><a class="g-color-gray-dark-v4 ng-binding" ng-click="setLanguage(LanguageItem.Index)">C</a></div><!-- end ngRepeat: LanguageItem in LanguageList | filterFirst | filterEven --><div ng-repeat="LanguageItem in LanguageList | filterFirst | filterEven" class="col-md-6 m-t-xs m-b-xs ng-scope"><a class="g-color-gray-dark-v4 ng-binding" ng-click="setLanguage(LanguageItem.Index)">C++</a></div><!-- end ngRepeat: LanguageItem in LanguageList | filterFirst | filterEven --><div ng-repeat="LanguageItem in LanguageList | filterFirst | filterEven" class="col-md-6 m-t-xs m-b-xs ng-scope"><a class="g-color-gray-dark-v4 ng-binding" ng-click="setLanguage(LanguageItem.Index)">C#</a></div><!-- end ngRepeat: LanguageItem in LanguageList | filterFirst | filterEven --><div ng-repeat="LanguageItem in LanguageList | filterFirst | filterEven" class="col-md-6 m-t-xs m-b-xs ng-scope"><a class="g-color-gray-dark-v4 ng-binding" ng-click="setLanguage(LanguageItem.Index)">Python2</a></div><!-- end ngRepeat: LanguageItem in LanguageList | filterFirst | filterEven --><div ng-repeat="LanguageItem in LanguageList | filterFirst | filterEven" class="col-md-6 m-t-xs m-b-xs ng-scope"><a class="g-color-gray-dark-v4 ng-binding" ng-click="setLanguage(LanguageItem.Index)">PyPy2</a></div><!-- end ngRepeat: LanguageItem in LanguageList | filterFirst | filterEven --><div ng-repeat="LanguageItem in LanguageList | filterFirst | filterEven" class="col-md-6 m-t-xs m-b-xs ng-scope"><a class="g-color-gray-dark-v4 ng-binding" ng-click="setLanguage(LanguageItem.Index)">Ruby</a></div><!-- end ngRepeat: LanguageItem in LanguageList | filterFirst | filterEven --><div ng-repeat="LanguageItem in LanguageList | filterFirst | filterEven" class="col-md-6 m-t-xs m-b-xs ng-scope"><a class="g-color-gray-dark-v4 ng-binding" ng-click="setLanguage(LanguageItem.Index)">Haskell</a></div><!-- end ngRepeat: LanguageItem in LanguageList | filterFirst | filterEven --><div ng-repeat="LanguageItem in LanguageList | filterFirst | filterEven" class="col-md-6 m-t-xs m-b-xs ng-scope"><a class="g-color-gray-dark-v4 ng-binding" ng-click="setLanguage(LanguageItem.Index)">Javascript</a></div><!-- end ngRepeat: LanguageItem in LanguageList | filterFirst | filterEven --><div ng-repeat="LanguageItem in LanguageList | filterFirst | filterEven" class="col-md-6 m-t-xs m-b-xs ng-scope"><a class="g-color-gray-dark-v4 ng-binding" ng-click="setLanguage(LanguageItem.Index)">Visual C++</a></div><!-- end ngRepeat: LanguageItem in LanguageList | filterFirst | filterEven --><div ng-repeat="LanguageItem in LanguageList | filterFirst | filterEven" class="col-md-6 m-t-xs m-b-xs ng-scope"><a class="g-color-gray-dark-v4 ng-binding" ng-click="setLanguage(LanguageItem.Index)">Pascal</a></div><!-- end ngRepeat: LanguageItem in LanguageList | filterFirst | filterEven -->
+        <!-- ngRepeat: LanguageItem in LanguageList | filterFirst | filterOdd --><div ng-repeat="LanguageItem in LanguageList | filterFirst | filterOdd" class="col-md-6 m-t-xs m-b-xs ng-scope"><a class="g-color-gray-dark-v4 ng-binding" ng-click="setLanguage(LanguageItem.Index)">C 11</a></div><!-- end ngRepeat: LanguageItem in LanguageList | filterFirst | filterOdd --><div ng-repeat="LanguageItem in LanguageList | filterFirst | filterOdd" class="col-md-6 m-t-xs m-b-xs ng-scope"><a class="g-color-gray-dark-v4 ng-binding" ng-click="setLanguage(LanguageItem.Index)">C++ 11</a></div><!-- end ngRepeat: LanguageItem in LanguageList | filterFirst | filterOdd --><div ng-repeat="LanguageItem in LanguageList | filterFirst | filterOdd" class="col-md-6 m-t-xs m-b-xs ng-scope"><a class="g-color-gray-dark-v4 ng-binding" ng-click="setLanguage(LanguageItem.Index)">Java</a></div><!-- end ngRepeat: LanguageItem in LanguageList | filterFirst | filterOdd --><div ng-repeat="LanguageItem in LanguageList | filterFirst | filterOdd" class="col-md-6 m-t-xs m-b-xs ng-scope"><a class="g-color-gray-dark-v4 ng-binding" ng-click="setLanguage(LanguageItem.Index)">Python3</a></div><!-- end ngRepeat: LanguageItem in LanguageList | filterFirst | filterOdd --><div ng-repeat="LanguageItem in LanguageList | filterFirst | filterOdd" class="col-md-6 m-t-xs m-b-xs ng-scope"><a class="g-color-gray-dark-v4 ng-binding" ng-click="setLanguage(LanguageItem.Index)">PyPy3</a></div><!-- end ngRepeat: LanguageItem in LanguageList | filterFirst | filterOdd --><div ng-repeat="LanguageItem in LanguageList | filterFirst | filterOdd" class="col-md-6 m-t-xs m-b-xs ng-scope"><a class="g-color-gray-dark-v4 ng-binding" ng-click="setLanguage(LanguageItem.Index)">Php</a></div><!-- end ngRepeat: LanguageItem in LanguageList | filterFirst | filterOdd --><div ng-repeat="LanguageItem in LanguageList | filterFirst | filterOdd" class="col-md-6 m-t-xs m-b-xs ng-scope"><a class="g-color-gray-dark-v4 ng-binding" ng-click="setLanguage(LanguageItem.Index)">Scala</a></div><!-- end ngRepeat: LanguageItem in LanguageList | filterFirst | filterOdd --><div ng-repeat="LanguageItem in LanguageList | filterFirst | filterOdd" class="col-md-6 m-t-xs m-b-xs ng-scope"><a class="g-color-gray-dark-v4 ng-binding" ng-click="setLanguage(LanguageItem.Index)">Go</a></div><!-- end ngRepeat: LanguageItem in LanguageList | filterFirst | filterOdd --><div ng-repeat="LanguageItem in LanguageList | filterFirst | filterOdd" class="col-md-6 m-t-xs m-b-xs ng-scope"><a class="g-color-gray-dark-v4 ng-binding" ng-click="setLanguage(LanguageItem.Index)">Objective C</a></div><!-- end ngRepeat: LanguageItem in LanguageList | filterFirst | filterOdd -->
+    </ul>
+</div>
+    </li>
+    <li>
+        <i class="fa fa-clock m-r-xs"></i>
+        <span class="ng-binding">1.0 秒</span>
+    </li>
+    <li class="ng-binding">
+        131,072.0 KB
+    </li>
+    <li ng-show="ProblemView.Problem.SpecialProgramLanguage !== 0" class="ng-hide">
+        <span class="badge badge-success">特判题</span>
+    </li>
+    <li>
+        <a ng-href="/Question/Index.html#questionId=1178" class="ng-binding" href="/Question/Index.html#questionId=1178">
+            C示例及说明
+        </a>
+    </li>
+    <li>
+        <a ng-href="/Challenge/SubmitTools.html" href="/Challenge/SubmitTools.html">
+            <span class="badge badge-success">代码测试工具</span>
+        </a>
+    </li>
+</ol>
+
+                                            <div ng-show="CurrentUserId &gt; 0" class="ng-hide">
+    <!--代码输入框（注意请务必设置高度，否则无法显示）-->
+    <pre id="code" class="ace_editor m-t-md ace-clouds" style="min-height: 400px; font-size: 18px;"><textarea class="ace_text-input" wrap="off" autocorrect="off" autocapitalize="off" spellcheck="false" style="opacity: 0;"></textarea><div class="ace_gutter" aria-hidden="true"><div class="ace_layer ace_gutter-layer ace_folding-enabled"></div><div class="ace_gutter-active-line"></div></div><div class="ace_scroller"><div class="ace_content"><div class="ace_layer ace_print-margin-layer"><div class="ace_print-margin" style="left: 4px; visibility: visible;"></div></div><div class="ace_layer ace_marker-layer"></div><div class="ace_layer ace_text-layer" style="padding: 0px 4px;"></div><div class="ace_layer ace_marker-layer"></div><div class="ace_layer ace_cursor-layer ace_hidden-cursors"><div class="ace_cursor"></div></div></div></div><div class="ace_scrollbar ace_scrollbar-v" style="display: none; width: 20px;"><div class="ace_scrollbar-inner" style="width: 20px;"></div></div><div class="ace_scrollbar ace_scrollbar-h" style="display: none; height: 20px;"><div class="ace_scrollbar-inner" style="height: 20px;"></div></div><div style="height: auto; width: auto; top: 0px; left: 0px; visibility: hidden; position: absolute; white-space: pre; font: inherit; overflow: hidden;"><div style="height: auto; width: auto; top: 0px; left: 0px; visibility: hidden; position: absolute; white-space: pre; font: inherit; overflow: visible;"></div><div style="height: auto; width: auto; top: 0px; left: 0px; visibility: hidden; position: absolute; white-space: pre; font: inherit; overflow: visible;">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</div></div></pre>
+</div>
+<div ng-show="CurrentUserId === 0" class="text-center">
+    <h1>登录后方可提交代码</h1>
+</div>
+
+<script type="text/javascript">
+    var AceEditor = {
+        Init: function () {
+            //初始化对象
+            var editor = ace.edit("code");
+            //设置风格和语言（更多风格和语言，请到github上相应目录查看）
+            var theme = "clouds"
+            var language = "c_cpp"
+            editor.setTheme("ace/theme/" + theme);
+            editor.session.setMode("ace/mode/" + language);
+            //字体大小
+            editor.setFontSize(18);
+            //设置只读（true时只读，用于展示代码）
+            editor.setReadOnly(false);
+            //自动换行,设置为off关闭
+            editor.setOption("wrap", "free")
+            //启用提示菜单
+            ace.require("/js/ace/ext/language_tools");
+            editor.setOptions({
+                enableBasicAutocompletion: true,
+                enableSnippets: true,
+                enableLiveAutocompletion: true
+            });
+
+        },
+        SetLanguage: function (language) {
+            //设置语言
+            if (language !== undefined &amp;&amp; language.length &gt; 0) {
+                var editor = ace.edit("code");
+                editor.session.setMode("ace/mode/" + language);
+            }
+        },
+        SetTheme: function (theme) {
+            //设置风格
+            var editor = ace.edit("code");
+            editor.setTheme("ace/theme/" + theme);
+        },
+        LastGetValue: "",
+        LastLang: "",
+        GetValue: function () {
+            //获得代码
+            var editor = ace.edit("code");
+            this.LastGetValue = editor.getValue();
+            this.LastLang = Scope.Lang;
+            return this.LastGetValue;
+        },
+        SetValue: function (input) {
+            //设置代码
+            if (input !== undefined &amp;&amp; input.length &gt; 0) {
+                var editor = ace.edit("code");
+                return editor.setValue(input);
+            }
+        },
+        ClearValue: function () {
+            //清空代码
+            var editor = ace.edit("code");
+            return editor.setValue("");
+        },
+        SetReadOnly: function (input) {
+            //设置只读（true时只读，用于展示代码）
+            var editor = ace.edit("code");
+            editor.setReadOnly(input);
+        },
+        SetAutoSave: function (id) {
+            //设置自动保存
+            var editor = ace.edit("code");
+            Tools['ProgramDraft' + id + 'AutoSave'] = false;
+            editor.on("change", function () {
+                if (id !== undefined &amp;&amp; !Tools['ProgramDraft' + id + 'AutoSave']) {
+                    Tools['ProgramDraft' + id + 'AutoSave'] = true;
+                    var timer = setTimeout(function () {
+                        NodPost.ProgramDraft.Save(id, editor.getValue(), Scope.Lang);
+                        Tools['ProgramDraft' + id + 'AutoSave'] = false;
+                    }, 10000);
+                }
+            });
+        },
+    }
+</script>
+
+                                            <div class="col-sm-12 text-right ng-hide" ng-show="CurrentUserId !== 0">
+                                                <label class="font-normal control-label block pull-left" ng-show="ProblemView.Problem.ShowType === NodEnum.ShowTypeEnum.Show.Index">
+                                                    <div class="icheckbox_square-green checked" style="position: relative;"><input type="checkbox" ng-init="IsPublic=true" ng-model="IsPublic" ng-icheck="" class="ng-pristine ng-untouched ng-valid ng-not-empty" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;" /><ins class="iCheck-helper" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0; cursor: pointer;"></ins></div>
+                                                    <span class="g-ml-10">允许其他 AC 用户查看此代码</span>
+                                                </label>
+                                                <button id="Run" ng-init="Tools.InitLaddaBtn('Run');" class="ladda-button btn btn-primary m-l-md" data-style="expand-left" ng-click="NodPost.Judge.Run(ProblemView.Problem.Id, Lang)">
+                                                    <span class="ladda-label">运行代码</span><div class="ladda-progress" style="width: 0px;"></div>
+                                                <span class="ladda-spinner"></span></button>
+                                                <button class="btn btn-primary m-l-md" ng-click="NodPost.Judge.Append(ProblemView.Problem.Id, Lang, IsPublic)" ng-show="ProblemView.Problem.ShowType === NodEnum.ShowTypeEnum.Show.Index">
+                                                    <span class="ladda-label">提交代码</span><span class="ladda-spinner"></span><div class="ladda-progress" style="width: 0px;"></div>
+                                                </button>
+                                                <button id="RunAll" ng-init="Tools.InitLaddaBtn('RunAll');" class="ladda-button btn btn-primary m-l-md ng-hide" data-style="expand-left" ng-click="NodPost.Judge.RunAll(ProblemView.Problem.Id, Lang);" ng-show="ProblemView.Problem.ShowType !== NodEnum.ShowTypeEnum.Show.Index">
+                                                    <span class="ladda-label">提交代码</span><div class="ladda-progress" style="width: 0px;"></div>
+                                                <span class="ladda-spinner"></span></button>
+                                            </div>
+                                            <div ng-show="TempJudgeShow &amp;&amp; TempJudgeOne" class="col-sm-12 m-t-lg ng-hide">
+    <div class="g-mb-10 row" ng-show="TempJudge == null">
+        <div class="col-md-2 ng-binding">
+    ms
+    <br />
+    KB
+</div>
+<div class="col-md-2">
+    <span ng-show="TempJudgeView.JudgeValue === NodEnum.JudgeValue.None.Index" class="g-mr-10 g-color-yellow ng-hide"><span class="g-mr-10">None</span><i class="fa fa-spinner"></i></span>
+<span ng-show="TempJudgeView.JudgeValue === NodEnum.JudgeValue.Processing.Index" class="g-mr-10 g-color-yellow ng-hide"><span class="g-mr-10">Processing</span><i class="fa fa-spinner"></i></span>
+<span ng-show="TempJudgeView.JudgeValue === NodEnum.JudgeValue.Accepted.Index" class="g-mr-10 g-color-green ng-hide"><span class="g-mr-10">Accepted</span><i class="fa fa-check"></i></span>
+<span ng-show="TempJudgeView.JudgeValue === NodEnum.JudgeValue.WrongAnswer.Index" class="g-mr-10 g-color-red ng-hide"><span class="g-mr-10">Wrong Answer</span><i class="fa fa-times"></i></span>
+<span ng-show="TempJudgeView.JudgeValue === NodEnum.JudgeValue.MemoryLimitExceed.Index" class="g-mr-10 g-color-red ng-hide"><span class="g-mr-10">Memory Limit Exceed</span><i class="fa fa-times"></i></span>
+<span ng-show="TempJudgeView.JudgeValue === NodEnum.JudgeValue.TimeLimitExceed.Index" class="g-mr-10 g-color-red ng-hide"><span class="g-mr-10">Time Limit Exceed</span><i class="fa fa-times"></i></span>
+<span ng-show="TempJudgeView.JudgeValue === NodEnum.JudgeValue.RunTimeError.Index" class="g-mr-10 g-color-red ng-hide"><span class="g-mr-10">Runtime Error</span><i class="fa fa-bug"></i></span>
+<span ng-show="TempJudgeView.JudgeValue === NodEnum.JudgeValue.JudgeError.Index" class="g-mr-10 g-color-red ng-hide"><span class="g-mr-10">Judge Error</span><i class="fa fa-bug"></i></span>
+<span ng-show="TempJudgeView.JudgeValue === NodEnum.JudgeValue.CompileError.Index" class="g-mr-10 g-color-red ng-hide"><span class="g-mr-10">Compile Error</span><i class="fa fa-bug"></i></span>
+<span ng-show="TempJudgeView.JudgeValue === NodEnum.JudgeValue.ChallangeSucceed.Index" class="g-mr-10 g-color-green ng-hide"><span class="g-mr-10">Challange Succeed</span><i class="fa fa-check"></i></span>
+<span ng-show="TempJudgeView.JudgeValue === NodEnum.JudgeValue.ChallangeFail.Index" class="g-mr-10 g-color-red ng-hide"><span class="g-mr-10">Challange Fail</span><i class="fa fa-check"></i></span>
+</div>
+<div class="col-md-12 row ng-hide" ng-show="TempJudgeView.JudgeValue === NodEnum.JudgeValue.CompileError.Index">
+    <h1>编译信息</h1>
+    <pre class="g-mr-10 ng-binding"></pre>
+</div>
+        
+    </div>
+    <div class="g-mb-10 row ng-hide" ng-show="TempJudge != null">
+        <span class="g-mr-10 ng-binding">#</span>
+<span class="g-mr-10 ng-binding">ms KB</span>
+<span ng-show="TempJudge.Result === NodEnum.JudgeResult.Running.Index" class="g-mr-10 g-color-yellow ng-hide"><span class="g-mr-10">Running</span><i class="fa fa-spinner"></i></span>
+<span ng-show="TempJudge.Result === NodEnum.JudgeResult.Accepted.Index" class="g-mr-10 g-color-green ng-hide"><span class="g-mr-10">Accepted</span><i class="fa fa-check"></i></span>
+<span ng-show="TempJudge.Result === NodEnum.JudgeResult.WrongAnswer.Index" class="g-mr-10 g-color-red ng-hide"><span class="g-mr-10">Wrong Answer</span><i class="fa fa-times"></i></span>
+<span ng-show="TempJudge.Result === NodEnum.JudgeResult.MemoryLimitExceed.Index" class="g-mr-10 g-color-red ng-hide"><span class="g-mr-10">Memory Limit Exceed</span><i class="fa fa-times"></i></span>
+<span ng-show="TempJudge.Result === NodEnum.JudgeResult.TimeLimitExceed.Index" class="g-mr-10 g-color-red ng-hide"><span class="g-mr-10">Time Limit Exceed</span><i class="fa fa-times"></i></span>
+<span ng-show="TempJudge.Result === NodEnum.JudgeResult.RunTimeError.Index" class="g-mr-10 g-color-red ng-hide"><span class="g-mr-10">Runtime Error</span><i class="fa fa-bug"></i></span>
+<span ng-show="TempJudge.Result === NodEnum.JudgeResult.DataFileLost.Index" class="g-mr-10 g-color-red ng-hide"><span class="g-mr-10">Data File Lost</span><i class="fa fa-bug"></i></span>
+<span ng-show="TempJudge.Result === NodEnum.JudgeResult.CreateProcess.Index" class="g-mr-10 g-color-yellow ng-hide"><span class="g-mr-10">Create Process</span><i class="fa fa-spinner"></i></span>
+<span ng-show="TempJudge.Result === NodEnum.JudgeResult.Blocked.Index" class="g-mr-10 g-color-yellow ng-hide"><span class="g-mr-10">Blocked</span><i class="fa fa-spinner"></i></span>
+<span ng-show="TempJudge.Result === NodEnum.JudgeResult.ProblemError.Index" class="g-mr-10 g-color-red ng-hide"><span class="g-mr-10">Problem Error</span><i class="fa fa-bug"></i></span>
+<span ng-show="TempJudge.Result === NodEnum.JudgeResult.FormatError.Index" class="g-mr-10 g-color-red ng-hide"><span class="g-mr-10">Format Error</span><i class="fa fa-bug"></i></span>
+<span ng-show="TempJudge.Result === NodEnum.JudgeResult.DataError.Index" class="g-mr-10 g-color-red ng-hide"><span class="g-mr-10">Data Error</span><i class="fa fa-bug"></i></span>
+<span ng-show="TempJudge.Result === NodEnum.JudgeResult.DataOk.Index" class="g-mr-10 g-color-green ng-hide"><span class="g-mr-10">Data Ok</span><i class="fa fa-check"></i></span>
+<span ng-show="TempJudge.Result === NodEnum.JudgeResult.ChallangeFail.Index" class="g-mr-10 g-color-red ng-hide"><span class="g-mr-10">Challange Fail</span><i class="fa fa-times"></i></span>
+<span ng-show="TempJudge.Result === NodEnum.JudgeResult.ChallangeSucceed.Index" class="g-mr-10 g-color-green ng-hide"><span class="g-mr-10">Challange Succeed</span><i class="fa fa-check"></i></span>
+<span ng-show="TempJudge.Result === NodEnum.JudgeResult.Retry.Index" class="g-mr-10 g-color-yellow ng-hide"><span class="g-mr-10">Retry</span><i class="fa fa-spinner"></i></span>
+<a class="g-mr-10 g-color-blue ng-hide" title="下载测试数据" data-toggle="modal" data-target="#ProblemTestData" ng-click="NodPost.TestView=TempJudge;" ng-show="!true"><i class="fa fa-download" aria-hidden="true"></i></a>
+
+    </div>
+    <div class="g-mb-10 row" ng-show="TestOne != null">
+        <h1>输入数据</h1>
+        <pre class="ng-binding">????
+</pre>
+        <h1 ng-show="TestOne.Output !== undefined" class="">正确的输出数据</h1>
+        <pre ng-show="TestOne.Output !== undefined" class="ng-binding">00
+01
+10
+11
+</pre>
+        <h1 ng-show="TestOne.Output === undefined" class="ng-hide">特判题目无标准输出数据</h1>
+    </div>
+</div>
+<div ng-show="TempJudgeShow &amp;&amp; !TempJudgeOne" class="col-sm-12 m-t-lg ng-hide">
+    <div class="g-mb-10 row">
+        <div class="col-md-2 ng-binding">
+    ms
+    <br />
+    KB
+</div>
+<div class="col-md-2">
+    <span ng-show="TempJudgeView.JudgeValue === NodEnum.JudgeValue.None.Index" class="g-mr-10 g-color-yellow ng-hide"><span class="g-mr-10">None</span><i class="fa fa-spinner"></i></span>
+<span ng-show="TempJudgeView.JudgeValue === NodEnum.JudgeValue.Processing.Index" class="g-mr-10 g-color-yellow ng-hide"><span class="g-mr-10">Processing</span><i class="fa fa-spinner"></i></span>
+<span ng-show="TempJudgeView.JudgeValue === NodEnum.JudgeValue.Accepted.Index" class="g-mr-10 g-color-green ng-hide"><span class="g-mr-10">Accepted</span><i class="fa fa-check"></i></span>
+<span ng-show="TempJudgeView.JudgeValue === NodEnum.JudgeValue.WrongAnswer.Index" class="g-mr-10 g-color-red ng-hide"><span class="g-mr-10">Wrong Answer</span><i class="fa fa-times"></i></span>
+<span ng-show="TempJudgeView.JudgeValue === NodEnum.JudgeValue.MemoryLimitExceed.Index" class="g-mr-10 g-color-red ng-hide"><span class="g-mr-10">Memory Limit Exceed</span><i class="fa fa-times"></i></span>
+<span ng-show="TempJudgeView.JudgeValue === NodEnum.JudgeValue.TimeLimitExceed.Index" class="g-mr-10 g-color-red ng-hide"><span class="g-mr-10">Time Limit Exceed</span><i class="fa fa-times"></i></span>
+<span ng-show="TempJudgeView.JudgeValue === NodEnum.JudgeValue.RunTimeError.Index" class="g-mr-10 g-color-red ng-hide"><span class="g-mr-10">Runtime Error</span><i class="fa fa-bug"></i></span>
+<span ng-show="TempJudgeView.JudgeValue === NodEnum.JudgeValue.JudgeError.Index" class="g-mr-10 g-color-red ng-hide"><span class="g-mr-10">Judge Error</span><i class="fa fa-bug"></i></span>
+<span ng-show="TempJudgeView.JudgeValue === NodEnum.JudgeValue.CompileError.Index" class="g-mr-10 g-color-red ng-hide"><span class="g-mr-10">Compile Error</span><i class="fa fa-bug"></i></span>
+<span ng-show="TempJudgeView.JudgeValue === NodEnum.JudgeValue.ChallangeSucceed.Index" class="g-mr-10 g-color-green ng-hide"><span class="g-mr-10">Challange Succeed</span><i class="fa fa-check"></i></span>
+<span ng-show="TempJudgeView.JudgeValue === NodEnum.JudgeValue.ChallangeFail.Index" class="g-mr-10 g-color-red ng-hide"><span class="g-mr-10">Challange Fail</span><i class="fa fa-check"></i></span>
+</div>
+<div class="col-md-12 row ng-hide" ng-show="TempJudgeView.JudgeValue === NodEnum.JudgeValue.CompileError.Index">
+    <h1>编译信息</h1>
+    <pre class="g-mr-10 ng-binding"></pre>
+</div>
+        
+    </div>
+    <!-- list item -->
+<div class="row">
+    <!-- ngRepeat: TempJudge in TempJudges -->
+</div>
+<!-- End list item -->
+
+</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div ng-controller="ItemFavoriteController" class="ng-scope">
+    <!-- Modal: Favorite -->
+    <div class="modal inmodal fade" id="Favorite" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">关闭窗口</span></button>
+                    <h4 class="modal-title ng-binding">为选择收藏?</h4>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        <button class="btn btn-default" data-toggle="modal" data-target="#CreateFavorite"><i class="fa fa-plus g-color-green g-mr-10"></i>创建一个新的收藏</button>
+                    </p>
+                    <p>
+                        </p><!-- ngRepeat: FavoriteItem in FavoriteItems -->
+                    <p></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Modal: Favorite -->
+    <!-- Modal: CreateFavorite -->
+    <div class="modal inmodal fade" id="CreateFavorite" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">关闭窗口</span></button>
+                    <h4 class="modal-title">创建收藏</h4>
+                </div>
+                <div class="modal-body">
+                    <input type="text" class="form-control ng-pristine ng-untouched ng-valid ng-empty" ng-model="FavoriteName" placeholder="收藏名称" />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="NodPost.Favorite.Append(FavoriteName, type);">创建收藏</button>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- End Modal: CreateFavorite -->
+</div>
+<script src="/include/controller/item-favorite-controller.js?version=1" type="text/javascript" charset="utf-8"></script>
+
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="ibox">
+    <div class="ibox-content clear">
+        <div class="col-lg-4 text-center w-80">
+            <h1 class="no-margins ng-binding">80</h1>
+            <small>分值</small>
+        </div>
+        <div class="col-lg-4 text-center border-left w-80">
+            <a ng-href="/Challenge/EfficiencyRank.html#problemId=1663" href="/Challenge/EfficiencyRank.html#problemId=1663">
+                <h1 class="no-margins text-navy ng-binding">0</h1>
+                <small class="text-navy">Accepted</small>
+            </a>
+        </div>
+
+        <div class="col-lg-4 text-center border-left w-80">
+            <a ng-href="/Challenge/ProblemSubmitList.html#problemId=1663" href="/Challenge/ProblemSubmitList.html#problemId=1663">
+                <h1 class="no-margins text-success ng-binding">1</h1>
+                <small class="text-success">提交</small>
+            </a>
+        </div>
+    </div>
+    <div class="ibox-content">
+        <ul class="nav nav-stacked nav-pills">
+            <li>
+                <a ng-href="/Challenge/Problem.html#problemId=1663" href="/Challenge/Problem.html#problemId=1663">
+                    <i class="fa fa-arrow-right"></i>
+                    题目描述<i class="fa arrow"></i>
+                </a>
+            </li>
+            <li>
+                <a ng-href="/Challenge/ProblemSubmitList.html#problemId=1663" href="/Challenge/ProblemSubmitList.html#problemId=1663">
+                    <i class="fa fa-arrow-right"></i>
+                    所有提交记录<i class="fa arrow"></i>
+                </a>
+            </li>
+            <!-- ngIf: ProblemView.UserView.JudgeCount > 0 -->
+            <li>
+                <a ng-href="/Challenge/AcceptedRank.html#problemId=1663" href="/Challenge/AcceptedRank.html#problemId=1663">
+                    <i class="fa fa-arrow-right"></i>
+                    排行榜<i class="fa arrow"></i>
+                </a>
+            </li>
+            <!-- ngIf: ProblemView.Problem.QuestionId !== 0 --><li ng-if="ProblemView.Problem.QuestionId !== 0" class="ng-scope">
+                <a ng-href="/Question/Index.html#questionId=2019" href="/Question/Index.html#questionId=2019">
+                    <i class="fa fa-arrow-right"></i>
+                    讨论区<i class="fa arrow"></i>
+                </a>
+            </li><!-- end ngIf: ProblemView.Problem.QuestionId !== 0 -->
+            <!-- ngIf: ProblemView.Problem.IsSolution --><li ng-if="ProblemView.Problem.IsSolution" class="ng-scope">
+                <a ng-href="/Challenge/ProblemSolution.html#problemId=1663" href="/Challenge/ProblemSolution.html#problemId=1663">
+                    <i class="fa fa-arrow-right"></i>
+                    解题报告<i class="fa arrow"></i>
+                </a>
+            </li><!-- end ngIf: ProblemView.Problem.IsSolution -->
+        </ul>
+    </div>
+    <div class="ibox-content">
+    <div class="team-members">
+        <!-- ngRepeat: User in User40 -->
+    </div>
+</div>
+
+</div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footer">
+    <div>
+        <a ng-href="http://www.miibeian.gov.cn" target="_blank" class="g-color-gray-dark-v4" href="http://www.miibeian.gov.cn">京ICP备12029907号</a>
+    </div>
+</div>
+
+
+
+                </div>
+            </div>
+            <!-- Chat -->
+<!-- End Chat -->
+        </div>
+        <!-- Mainly scripts -->
+<script src="/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+<!-- Flot -->
+<script src="/js/plugins/flot/jquery.flot.js"></script>
+<script src="/js/plugins/flot/jquery.flot.tooltip.min.js"></script>
+<script src="/js/plugins/flot/jquery.flot.spline.js"></script>
+<script src="/js/plugins/flot/jquery.flot.resize.js"></script>
+<script src="/js/plugins/flot/jquery.flot.pie.js"></script>
+
+<!-- Peity -->
+<script src="/js/plugins/peity/jquery.peity.min.js"></script>
+
+<!-- Custom and plugin javascript -->
+<script src="/js/inspinia.js"></script>
+<script src="/js/plugins/pace/pace.min.js"></script>
+
+<!-- jQuery UI -->
+<script src="/js/plugins/jquery-ui/jquery-ui.min.js"></script>
+
+<!-- GITTER -->
+<script src="/js/plugins/gritter/jquery.gritter.min.js"></script>
+
+<!-- Sparkline -->
+<script src="/js/plugins/sparkline/jquery.sparkline.min.js"></script>
+
+<!-- ChartJS-->
+<script src="/js/plugins/chartJs/Chart.min.js"></script>
+
+<!-- Sparkline demo data  -->
+<script src="/js/demo/sparkline-demo.js"></script>
+
+<!-- Peity -->
+<script src="/js/demo/peity-demo.js"></script>
+
+<!-- Ace -->
+<script src="/js/ace/ace.js" type="text/javascript" charset="utf-8"></script>
+<script src="/js/ace/ext-language_tools.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Typehead -->
+<script src="/js/plugins/typehead/bootstrap3-typeahead.min.js"></script>
+
+<!-- SweetAlert2 -->
+<script src="/js/plugins/sweetalert2/sweetalert2.all.min.js"></script>
+<!-- Include a polyfill for ES6 Promises (optional) for IE11, UC Browser and Android browser support -->
+<script src="/js/plugins/sweetalert2/polyfill.js"></script>
+
+<!-- Toastr -->
+<script src="/js/plugins/toastr/toastr.min.js"></script>
+
+<script>
+    toastr.options = {
+        "closeButton": false,
+        "debug": true,
+        "newestOnTop": false,
+        "progressBar": false,
+        "positionClass": "toast-top-right",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": "400",
+        "hideDuration": "1000",
+        "timeOut": "2000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut",
+    }
+</script>
+
+
+<!-- Config -->
+<script src="/common/PathJs.js?version=17" type="text/javascript" charset="utf-8"></script>
+<script src="/common/GetterJs.js?version=3" type="text/javascript" charset="utf-8"></script>
+<script src="/include/controller/lang.js?version=1" type="text/javascript" charset="utf-8"></script>
+<script src="/include/controller/enum.js?version=9" type="text/javascript" charset="utf-8"></script>
+<script src="/include/controller/NodPost.js?version=52" type="text/javascript" charset="utf-8"></script>
+<script src="/include/controller/permission.js?version=2" type="text/javascript" charset="utf-8"></script>
+
+<!-- WebSocket -->
+<script src="/include/controller/websocket.js?version=26"></script>
+
+
+        <!-- iCheck -->
+<script src="/js/plugins/iCheck/icheck.min.js"></script>
+<script src="/include/controller/JavascriptICheck.js"></script>
+
+
+        <script src="/include/controller/simplify-controller.js" type="text/javascript" charset="utf-8"></script>
+        <!-- Ladda -->
+<script src="/js/plugins/ladda/spin.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="/js/plugins/ladda/ladda.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="/js/plugins/ladda/ladda.jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+    var laddaBtns = [];
+    var stopLaddaBtns = function () {
+        for (var btn in laddaBtns)
+            laddaBtns[btn].ladda('stop');
+    }
+    Tools.InitLaddaBtn = function (buttonId) {
+        // Bind normal buttons
+        var laddaBtn = $('#' + buttonId).ladda();
+        laddaBtns.push(laddaBtn);
+        laddaBtn.click(function () {
+            laddaBtn.ladda('start');
+        });
+    }
+</script>
+
+        <script type="text/javascript">
+            PageHook = function () {
+                Scope.setLanguage = function (index) {
+                    AceEditor.SetLanguage(Scope.LanguageList[index].AceName);
+                    Scope.Lang = Scope.LanguageList[index].Lang;
+                    Tools.SetCookie('Lang', Scope.Lang, 365);
+                }
+            }
+            DataHook = function () {
+                AceEditor.Init();
+
+                if (Scope.JudgeView != null) {
+                    Scope.Lang = Scope.JudgeView.Judge.Language;
+
+                    if (Scope.JudgeView.UserView.ProgramContent != null)
+                        AceEditor.SetValue(Scope.JudgeView.UserView.ProgramContent);
+                    else
+                        AceEditor.ClearValue();
+                }
+                else
+                    AceEditor.ClearValue();
+
+                if (Scope.Lang === undefined || Scope.Lang === -1) {
+                    if (Tools.GetCookie('Lang').length === 0)
+                        Tools.SetCookie('Lang', 1, 365);
+                    Scope.Lang = Tools.GetCookie('Lang');
+                }
+
+                AceEditor.SetAutoSave(Scope.ProblemView.Problem.Id);
+                AceEditor.SetLanguage(Scope.LanguageList[Scope.getLanguageIndex(Scope.Lang)].AceName);
+            }
+        </script>
+    
+
+</body></html>

@@ -29,10 +29,11 @@ strcture:
 -----------------------------------------
 basic function:
 search blank: search for the blog based on the keywords
-explore: the recently published blog
+explore: the recently published blog,or recommand problem
 Home: write your blog
 Blog: to show all the Blog and your friends blog
 Comment:write your comment
+Follow:follow the guys that you interested
 
 ----------------------------------------
 the navigation bar:

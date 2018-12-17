@@ -33,7 +33,7 @@
             </ul>
 
             <ul class="nav navbar-nav">
-                <li><a href="https://docs.python-guide.org/#">Explore</a></li>
+                <li><a href="{{ url_for('search.explore')}} ">Explore</a></li>
             </ul>
             <ul> <!-- search function -->
                 <form class="navbar-form navbar-left" action="{{ url_for('search.search') }}" method="GET">
