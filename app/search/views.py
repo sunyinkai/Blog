@@ -12,6 +12,7 @@ import re
 @search.route('/explore')
 def explore():
     # generate an random num
+    flag=request.args.get('flag')
     headers = {
         'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) \
      Chrome/70.0.3538.110 Safari/537.36'
@@ -58,7 +59,7 @@ def explore():
     return render_template('search/problem_show.html',title=title,descripion=descripion,
                            input_description=input_description,
                            output_descrition=output_descrition,input_sample=input_sample,
-                           output_sample=output_sample,url=problemUrl)
+                           output_sample=output_sample,url=problemUrl,problemID=problemID)
 
 
 @search.route('/search')
