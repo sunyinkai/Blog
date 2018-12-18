@@ -59,6 +59,10 @@ def add_to_database(problem_id):
 def explore():
     # generate an random num
     while True:
+        if (request.args.get('flag') is None) and (session.get('problem_id') is not None):
+            problem_id = session.get('problem_id')
+            break
+
         problem_id = random.randint(1000, 1500)  # random a problem id
         problem = Problem.query.filter_by(id=problem_id).first()
         print(problem)
@@ -86,8 +90,10 @@ def explore():
             db.session.commit()
     # write the problem_id to the session the avoid flush
     flag = request.args.get('flag')
+    # session is NULL:the first time to visit this page
+    # flag is not None:visit this page by click change the problem
     if (flag is not None) or (session.get('problem_id') is None):
-        session['problem_id'] = problem_id  # if the session is NULL,or want to change,get a new
+        session['problem_id'] = problem_id
         return redirect('http://localhost:5000/explore')
     else:
         problem_id = session['problem_id']  # else use the problem in the session
